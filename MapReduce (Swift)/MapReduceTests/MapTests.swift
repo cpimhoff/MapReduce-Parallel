@@ -1,6 +1,6 @@
 //
-//  MapReduceTests.swift
-//  MapReduceTests
+//  MapTests.swift
+//  MapTests
 //
 //  Created by Charlie Imhoff on 5/21/17.
 //  Copyright © 2017 Charlie Imhoff. All rights reserved.
@@ -34,8 +34,8 @@ class MapTests: XCTestCase {
 	}
 	
     func testMap() {
-		var results : [String]!
-		var expected : [String]!
+		var results : [String]?
+		var expected : [String]?
 
 		// performance is roughly = workTime * (datasetSize / max_threads)
 		self.measure {
@@ -49,7 +49,7 @@ class MapTests: XCTestCase {
 		// accuracy assurance
 		expected = self.data.map { x in "\(x)" }
 		
-		XCTAssertEqual(results, expected)
+		XCTAssertEqual(results!, expected!)
 	}
     
 }

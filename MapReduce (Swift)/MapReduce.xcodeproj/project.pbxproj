@@ -14,6 +14,7 @@
 		CB05C1BD1ED23A4700EC8CBB /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB05C1BC1ED23A4700EC8CBB /* MapTests.swift */; };
 		CB05C1BF1ED23A4700EC8CBB /* MapReduce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB05C1A41ED22AA100EC8CBB /* MapReduce.framework */; };
 		CB71741B1ED284EB00C0B439 /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB71741A1ED284EB00C0B439 /* SynchronizedArray.swift */; };
+		CBF353B81ED67BB60081B154 /* ReduceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF353B71ED67BB60081B154 /* ReduceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		CB05C1BC1ED23A4700EC8CBB /* MapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTests.swift; sourceTree = "<group>"; };
 		CB05C1BE1ED23A4700EC8CBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB71741A1ED284EB00C0B439 /* SynchronizedArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
+		CBF353B71ED67BB60081B154 /* ReduceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReduceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				CB05C1BC1ED23A4700EC8CBB /* MapTests.swift */,
+				CBF353B71ED67BB60081B154 /* ReduceTests.swift */,
 				CB05C1BE1ED23A4700EC8CBB /* Info.plist */,
 			);
 			path = MapReduceTests;
@@ -231,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB05C1BD1ED23A4700EC8CBB /* MapTests.swift in Sources */,
+				CBF353B81ED67BB60081B154 /* ReduceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
