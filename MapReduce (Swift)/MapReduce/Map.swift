@@ -8,11 +8,11 @@
 
 import Foundation
 
-public func map<T:DataSource, J>
-	(_ datasource: T, using mapClosure: @escaping (T.DataPoint) -> J) -> [J] {
+public func map<Source:DataSource, MappedPoint>(_ datasource: Source,
+                using mapping: @escaping (Source.DataPoint) -> MappedPoint) -> [MappedPoint] {
 	
 	// create empty results array of length `datasource.count`
-	let results = SynchronizedArray<J!>.init(repeating: nil, count: datasource.count)
+	let results = SynchronizedArray<MappedPoint!>.init(repeating: nil, count: datasource.count)
 	
 	// dispatch work to a concurrent queue, mapping items and saving them to `results`
 	let queue = DispatchQueue(label: "edu.carleton.chaz&ben.map", qos: .userInitiated, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil)
@@ -23,7 +23,7 @@ public func map<T:DataSource, J>
 			// fetching the item is async as well, in case that is time intensive (such as on a DB)
 			let item = datasource[i]
 			// envoke user specified mapping function
-			let mappedItem = mapClosure(item)
+			let mappedItem = mapping(item)
 			
 			results[i] = mappedItem
 		}
