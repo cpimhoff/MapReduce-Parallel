@@ -1,0 +1,26 @@
+//
+//  DataSource.swift
+//  MapReduce
+//
+//  Created by Charlie Imhoff on 5/21/17.
+//  Copyright © 2017 Charlie Imhoff. All rights reserved.
+//
+
+import Foundation
+
+/// Abstraction over input data structures
+/// because DataSource is used only for reading input values,
+/// a non-thread-safe implementation (such as the standard `Array`) is acceptable.
+public protocol DataSource {
+	
+	associatedtype DataPoint
+	
+	var count : Int { get }
+	subscript(index: Int) -> DataPoint { get }
+	
+}
+
+// explicitly comform `Array` and `SynchronizedArray` to `DataSource`
+// (they already has all the protocol requirements implemented)
+extension Array : DataSource {}
+extension SynchronizedArray : DataSource {}
