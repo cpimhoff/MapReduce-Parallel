@@ -15,7 +15,10 @@ public protocol DataSource {
 	
 	associatedtype DataPoint
 	
+	/// The amount of datapoints represented by the reciever.
 	var count : Int { get }
+	
+	/// Index the reciver with the first element at index `0`, and the last at index `self.count - 1`
 	subscript(index: Int) -> DataPoint { get }
 	
 }
