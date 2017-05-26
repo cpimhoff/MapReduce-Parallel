@@ -26,10 +26,15 @@ private func subreduce<Source:DataSource, Result>
 	 baseValue: @escaping (Source.DataPoint) -> Result,
 	 merge: @escaping (Result, Result) -> Result) -> Result {
 	
-	// base case
+	// base cases
 	if range.count == 1 {
 		let item = datasource[range.lowerBound]
 		return baseValue(item)
+	} else if range.count == 2 {
+		// small optimization, just compute directly
+		let lowerItem = datasource[range.lowerBound]
+		let upperItem = datasource[range.upperBound - 1]
+		return merge(baseValue(lowerItem), baseValue(upperItem))
 	}
 	
 	// rec. case, merge results
