@@ -9,8 +9,8 @@
 import XCTest
 import MapReduce
 
-private let artificialWorkTime : TimeInterval = 0.001
-private let datasetSize : Int = 1_000
+private let artificialWorkTime : TimeInterval = 0.1
+private let datasetSize : Int = 10
 
 class ReduceTests: XCTestCase {
 	
@@ -49,7 +49,7 @@ class ReduceTests: XCTestCase {
 		
 		// performance is roughly = ...
 		self.measure {
-			result = reduce(self.data, initialResult: 0, with: baseValuation, merge: add)
+			result = reduce(self.data, baseValue: baseValuation, merge: add)
 		}
 		
 		// accuracy assurance
