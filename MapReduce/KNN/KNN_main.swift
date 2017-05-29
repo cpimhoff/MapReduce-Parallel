@@ -9,5 +9,5 @@
 import Foundation
 
 func main(k: Int) {
-	printToAppConsole("Hello World!")
+	printToAppConsole("Hello World! \(k)")
 }

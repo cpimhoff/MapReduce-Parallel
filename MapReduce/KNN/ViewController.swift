@@ -20,10 +20,19 @@ class ViewController: NSViewController {
 	}
 	
 	@IBAction func runKNN(_ sender: Any?) {
-		let k = Int(kField.stringValue)!
-		main(k: k)
+		clearAppConsole()
+		
+		if let k = Int(kField.stringValue) && k > 0 {
+			main(k: k)
+		} else {
+			printToAppConsole("K must be a positive Integer")
+		}
 	}
 	
+}
+
+func clearAppConsole() {
+	ViewController.consoleTextBox.stringValue = ""
 }
 
 func printToAppConsole(_ text: String) {
