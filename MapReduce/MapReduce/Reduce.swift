@@ -47,14 +47,14 @@ private func subreduce<Source:DataSource, Result>
 	
 	var lowerResult : Result! = nil
 	var upperResult : Result! = nil
+	// async down to another thread to handle `lowerCut`
 	queue.async(group: batch) {
 		lowerResult = subreduce(datasource, range: lowerCut,
 		                        onQueue: queue, baseValue: baseValue, merge: merge)
 	}
-	queue.async(group: batch) {
-		upperResult = subreduce(datasource, range: upperCut,
-		                        onQueue: queue, baseValue: baseValue, merge: merge)
-	}
+	// reuse this thread in handling `upperCut`, as we'll be blocking on handling both cases anyways
+	upperResult = subreduce(datasource, range: upperCut,
+	                        onQueue: queue, baseValue: baseValue, merge: merge)
 	
 	// barrier (block) until subcases are complete
 	// merge synchronously
