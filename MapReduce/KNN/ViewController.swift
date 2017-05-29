@@ -22,7 +22,7 @@ class ViewController: NSViewController {
 	@IBAction func runKNN(_ sender: Any?) {
 		clearAppConsole()
 		
-		if let k = Int(kField.stringValue) && k > 0 {
+		if let k = Int(kField.stringValue), k > 0 {
 			main(k: k)
 		} else {
 			printToAppConsole("K must be a positive Integer")
