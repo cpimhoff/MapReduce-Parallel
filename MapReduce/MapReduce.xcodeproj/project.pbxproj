@@ -13,10 +13,8 @@
 		CB05C1B41ED22B8100EC8CBB /* Reduce.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB05C1B31ED22B8100EC8CBB /* Reduce.swift */; };
 		CB05C1BD1ED23A4700EC8CBB /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB05C1BC1ED23A4700EC8CBB /* MapTests.swift */; };
 		CB71741B1ED284EB00C0B439 /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB71741A1ED284EB00C0B439 /* SynchronizedArray.swift */; };
-		CBBA0D321EDBC75F00D03A40 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBA0D311EDBC75F00D03A40 /* main.swift */; };
 		CBBA0D401EDBC8CA00D03A40 /* MapReduce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB05C1A41ED22AA100EC8CBB /* MapReduce.framework */; };
 		CBBA0D451EDBC96B00D03A40 /* MapReduce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB05C1A41ED22AA100EC8CBB /* MapReduce.framework */; };
-		CBBA0D461EDBC9B000D03A40 /* MapReduce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB05C1A41ED22AA100EC8CBB /* MapReduce.framework */; };
 		CBF353B81ED67BB60081B154 /* ReduceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF353B71ED67BB60081B154 /* ReduceTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,37 +26,7 @@
 			remoteGlobalIDString = CB05C1A31ED22AA100EC8CBB;
 			remoteInfo = MapReduce;
 		};
-		CBBA0D3D1EDBC89400D03A40 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CB05C19B1ED22AA100EC8CBB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CB05C1A31ED22AA100EC8CBB;
-			remoteInfo = MapReduce;
-		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		CBBA0D2D1EDBC75F00D03A40 /* Copy Files */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			name = "Copy Files";
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-		CBBA0D391EDBC7C900D03A40 /* Copy Files */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 12;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Copy Files";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CB05C1A41ED22AA100EC8CBB /* MapReduce.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MapReduce.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,8 +39,6 @@
 		CB05C1BC1ED23A4700EC8CBB /* MapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTests.swift; sourceTree = "<group>"; };
 		CB05C1BE1ED23A4700EC8CBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB71741A1ED284EB00C0B439 /* SynchronizedArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
-		CBBA0D2F1EDBC75F00D03A40 /* KNN */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KNN; sourceTree = BUILT_PRODUCTS_DIR; };
-		CBBA0D311EDBC75F00D03A40 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		CBF353B71ED67BB60081B154 /* ReduceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReduceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,14 +59,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CBBA0D2C1EDBC75F00D03A40 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CBBA0D461EDBC9B000D03A40 /* MapReduce.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -109,7 +67,6 @@
 			children = (
 				CB05C1A61ED22AA100EC8CBB /* MapReduce */,
 				CB05C1BB1ED23A4700EC8CBB /* MapReduceTests */,
-				CBBA0D301EDBC75F00D03A40 /* KNN */,
 				CB05C1A51ED22AA100EC8CBB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -119,7 +76,6 @@
 			children = (
 				CB05C1A41ED22AA100EC8CBB /* MapReduce.framework */,
 				CB05C1BA1ED23A4700EC8CBB /* MapReduceTests.xctest */,
-				CBBA0D2F1EDBC75F00D03A40 /* KNN */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -153,14 +109,6 @@
 				CB05C1BE1ED23A4700EC8CBB /* Info.plist */,
 			);
 			path = MapReduceTests;
-			sourceTree = "<group>";
-		};
-		CBBA0D301EDBC75F00D03A40 /* KNN */ = {
-			isa = PBXGroup;
-			children = (
-				CBBA0D311EDBC75F00D03A40 /* main.swift */,
-			);
-			path = KNN;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,25 +161,6 @@
 			productReference = CB05C1BA1ED23A4700EC8CBB /* MapReduceTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		CBBA0D2E1EDBC75F00D03A40 /* KNN */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CBBA0D351EDBC75F00D03A40 /* Build configuration list for PBXNativeTarget "KNN" */;
-			buildPhases = (
-				CBBA0D391EDBC7C900D03A40 /* Copy Files */,
-				CBBA0D2B1EDBC75F00D03A40 /* Sources */,
-				CBBA0D2C1EDBC75F00D03A40 /* Frameworks */,
-				CBBA0D2D1EDBC75F00D03A40 /* Copy Files */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CBBA0D3E1EDBC89400D03A40 /* PBXTargetDependency */,
-			);
-			name = KNN;
-			productName = KNN;
-			productReference = CBBA0D2F1EDBC75F00D03A40 /* KNN */;
-			productType = "com.apple.product-type.tool";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -252,11 +181,6 @@
 						DevelopmentTeam = WNZEWX34Q6;
 						ProvisioningStyle = Automatic;
 					};
-					CBBA0D2E1EDBC75F00D03A40 = {
-						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = WNZEWX34Q6;
-						ProvisioningStyle = Automatic;
-					};
 				};
 			};
 			buildConfigurationList = CB05C19E1ED22AA100EC8CBB /* Build configuration list for PBXProject "MapReduce" */;
@@ -273,7 +197,6 @@
 			targets = (
 				CB05C1A31ED22AA100EC8CBB /* MapReduce */,
 				CB05C1B91ED23A4700EC8CBB /* MapReduceTests */,
-				CBBA0D2E1EDBC75F00D03A40 /* KNN */,
 			);
 		};
 /* End PBXProject section */
@@ -316,14 +239,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CBBA0D2B1EDBC75F00D03A40 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CBBA0D321EDBC75F00D03A40 /* main.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -331,11 +246,6 @@
 			isa = PBXTargetDependency;
 			target = CB05C1A31ED22AA100EC8CBB /* MapReduce */;
 			targetProxy = CB05C1C01ED23A4700EC8CBB /* PBXContainerItemProxy */;
-		};
-		CBBA0D3E1EDBC89400D03A40 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CB05C1A31ED22AA100EC8CBB /* MapReduce */;
-			targetProxy = CBBA0D3D1EDBC89400D03A40 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -509,30 +419,6 @@
 			};
 			name = Release;
 		};
-		CBBA0D331EDBC75F00D03A40 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				DEVELOPMENT_TEAM = WNZEWX34Q6;
-				FRAMEWORK_SEARCH_PATHS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		CBBA0D341EDBC75F00D03A40 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				DEVELOPMENT_TEAM = WNZEWX34Q6;
-				FRAMEWORK_SEARCH_PATHS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -562,14 +448,6 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
-		};
-		CBBA0D351EDBC75F00D03A40 /* Build configuration list for PBXNativeTarget "KNN" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CBBA0D331EDBC75F00D03A40 /* Debug */,
-				CBBA0D341EDBC75F00D03A40 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
