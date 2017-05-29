@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MapReduce
 
 func main(k: Int) {
 	printToAppConsole("Hello World! \(k)")
