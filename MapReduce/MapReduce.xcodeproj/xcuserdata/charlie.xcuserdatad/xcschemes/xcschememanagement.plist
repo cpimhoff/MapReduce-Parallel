@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>KNN.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>MapReduce.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -28,6 +33,11 @@
 			<true/>
 		</dict>
 		<key>CBBA0D2E1EDBC75F00D03A40</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CBCEEF131EDBD22100DD9678</key>
 		<dict>
 			<key>primary</key>
 			<true/>

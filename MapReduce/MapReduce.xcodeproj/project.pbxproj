@@ -13,13 +13,24 @@
 		CB05C1B41ED22B8100EC8CBB /* Reduce.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB05C1B31ED22B8100EC8CBB /* Reduce.swift */; };
 		CB05C1BD1ED23A4700EC8CBB /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB05C1BC1ED23A4700EC8CBB /* MapTests.swift */; };
 		CB71741B1ED284EB00C0B439 /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB71741A1ED284EB00C0B439 /* SynchronizedArray.swift */; };
-		CBBA0D401EDBC8CA00D03A40 /* MapReduce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB05C1A41ED22AA100EC8CBB /* MapReduce.framework */; };
-		CBBA0D451EDBC96B00D03A40 /* MapReduce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB05C1A41ED22AA100EC8CBB /* MapReduce.framework */; };
+		CBCEEF171EDBD22100DD9678 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCEEF161EDBD22100DD9678 /* AppDelegate.swift */; };
+		CBCEEF191EDBD22100DD9678 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCEEF181EDBD22100DD9678 /* ViewController.swift */; };
+		CBCEEF1B1EDBD22100DD9678 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBCEEF1A1EDBD22100DD9678 /* Assets.xcassets */; };
+		CBCEEF1E1EDBD22100DD9678 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBCEEF1C1EDBD22100DD9678 /* Main.storyboard */; };
+		CBCEEF261EDBD23F00DD9678 /* MapReduce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB05C1A41ED22AA100EC8CBB /* MapReduce.framework */; };
+		CBCEEF281EDBD3FE00DD9678 /* KNN_main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCEEF271EDBD3FE00DD9678 /* KNN_main.swift */; };
 		CBF353B81ED67BB60081B154 /* ReduceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF353B71ED67BB60081B154 /* ReduceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		CB05C1C01ED23A4700EC8CBB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CB05C19B1ED22AA100EC8CBB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CB05C1A31ED22AA100EC8CBB;
+			remoteInfo = MapReduce;
+		};
+		CBCEEF231EDBD22600DD9678 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CB05C19B1ED22AA100EC8CBB /* Project object */;
 			proxyType = 1;
@@ -39,6 +50,13 @@
 		CB05C1BC1ED23A4700EC8CBB /* MapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTests.swift; sourceTree = "<group>"; };
 		CB05C1BE1ED23A4700EC8CBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB71741A1ED284EB00C0B439 /* SynchronizedArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
+		CBCEEF141EDBD22100DD9678 /* KNN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KNN.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CBCEEF161EDBD22100DD9678 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CBCEEF181EDBD22100DD9678 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CBCEEF1A1EDBD22100DD9678 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CBCEEF1D1EDBD22100DD9678 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CBCEEF1F1EDBD22100DD9678 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CBCEEF271EDBD3FE00DD9678 /* KNN_main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KNN_main.swift; sourceTree = "<group>"; };
 		CBF353B71ED67BB60081B154 /* ReduceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReduceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -47,7 +65,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBBA0D451EDBC96B00D03A40 /* MapReduce.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,7 +72,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBBA0D401EDBC8CA00D03A40 /* MapReduce.framework in Frameworks */,
+				CBCEEF261EDBD23F00DD9678 /* MapReduce.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CBCEEF111EDBD22100DD9678 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +91,7 @@
 			children = (
 				CB05C1A61ED22AA100EC8CBB /* MapReduce */,
 				CB05C1BB1ED23A4700EC8CBB /* MapReduceTests */,
+				CBCEEF151EDBD22100DD9678 /* KNN */,
 				CB05C1A51ED22AA100EC8CBB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -76,6 +101,7 @@
 			children = (
 				CB05C1A41ED22AA100EC8CBB /* MapReduce.framework */,
 				CB05C1BA1ED23A4700EC8CBB /* MapReduceTests.xctest */,
+				CBCEEF141EDBD22100DD9678 /* KNN.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -109,6 +135,27 @@
 				CB05C1BE1ED23A4700EC8CBB /* Info.plist */,
 			);
 			path = MapReduceTests;
+			sourceTree = "<group>";
+		};
+		CBCEEF151EDBD22100DD9678 /* KNN */ = {
+			isa = PBXGroup;
+			children = (
+				CBCEEF291EDBD40500DD9678 /* application wrapper */,
+				CBCEEF271EDBD3FE00DD9678 /* KNN_main.swift */,
+			);
+			path = KNN;
+			sourceTree = "<group>";
+		};
+		CBCEEF291EDBD40500DD9678 /* application wrapper */ = {
+			isa = PBXGroup;
+			children = (
+				CBCEEF161EDBD22100DD9678 /* AppDelegate.swift */,
+				CBCEEF181EDBD22100DD9678 /* ViewController.swift */,
+				CBCEEF1A1EDBD22100DD9678 /* Assets.xcassets */,
+				CBCEEF1C1EDBD22100DD9678 /* Main.storyboard */,
+				CBCEEF1F1EDBD22100DD9678 /* Info.plist */,
+			);
+			name = "application wrapper";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +208,24 @@
 			productReference = CB05C1BA1ED23A4700EC8CBB /* MapReduceTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		CBCEEF131EDBD22100DD9678 /* KNN */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CBCEEF201EDBD22100DD9678 /* Build configuration list for PBXNativeTarget "KNN" */;
+			buildPhases = (
+				CBCEEF101EDBD22100DD9678 /* Sources */,
+				CBCEEF111EDBD22100DD9678 /* Frameworks */,
+				CBCEEF121EDBD22100DD9678 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CBCEEF241EDBD22600DD9678 /* PBXTargetDependency */,
+			);
+			name = KNN;
+			productName = KNN;
+			productReference = CBCEEF141EDBD22100DD9678 /* KNN.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -181,6 +246,11 @@
 						DevelopmentTeam = WNZEWX34Q6;
 						ProvisioningStyle = Automatic;
 					};
+					CBCEEF131EDBD22100DD9678 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = WNZEWX34Q6;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = CB05C19E1ED22AA100EC8CBB /* Build configuration list for PBXProject "MapReduce" */;
@@ -189,6 +259,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = CB05C19A1ED22AA100EC8CBB;
 			productRefGroup = CB05C1A51ED22AA100EC8CBB /* Products */;
@@ -197,6 +268,7 @@
 			targets = (
 				CB05C1A31ED22AA100EC8CBB /* MapReduce */,
 				CB05C1B91ED23A4700EC8CBB /* MapReduceTests */,
+				CBCEEF131EDBD22100DD9678 /* KNN */,
 			);
 		};
 /* End PBXProject section */
@@ -213,6 +285,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CBCEEF121EDBD22100DD9678 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CBCEEF1B1EDBD22100DD9678 /* Assets.xcassets in Resources */,
+				CBCEEF1E1EDBD22100DD9678 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +320,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CBCEEF101EDBD22100DD9678 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CBCEEF281EDBD3FE00DD9678 /* KNN_main.swift in Sources */,
+				CBCEEF191EDBD22100DD9678 /* ViewController.swift in Sources */,
+				CBCEEF171EDBD22100DD9678 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -247,7 +338,23 @@
 			target = CB05C1A31ED22AA100EC8CBB /* MapReduce */;
 			targetProxy = CB05C1C01ED23A4700EC8CBB /* PBXContainerItemProxy */;
 		};
+		CBCEEF241EDBD22600DD9678 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CB05C1A31ED22AA100EC8CBB /* MapReduce */;
+			targetProxy = CBCEEF231EDBD22600DD9678 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CBCEEF1C1EDBD22100DD9678 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CBCEEF1D1EDBD22100DD9678 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CB05C1AA1ED22AA100EC8CBB /* Debug */ = {
@@ -419,6 +526,36 @@
 			};
 			name = Release;
 		};
+		CBCEEF211EDBD22100DD9678 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = WNZEWX34Q6;
+				INFOPLIST_FILE = KNN/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cpimhoff.KNN;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		CBCEEF221EDBD22100DD9678 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = WNZEWX34Q6;
+				INFOPLIST_FILE = KNN/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cpimhoff.KNN;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -448,6 +585,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		CBCEEF201EDBD22100DD9678 /* Build configuration list for PBXNativeTarget "KNN" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CBCEEF211EDBD22100DD9678 /* Debug */,
+				CBCEEF221EDBD22100DD9678 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
