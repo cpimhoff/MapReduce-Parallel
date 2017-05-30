@@ -11,6 +11,7 @@ import Foundation
 struct Point {
 	
 	let features : [Int]
+    let label : Int
 	
 	/// Euclidean distance between this Point and the reciever
 	func distance(to other: Point) -> Float {
