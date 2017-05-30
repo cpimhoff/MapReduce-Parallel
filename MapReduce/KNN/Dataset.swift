@@ -55,9 +55,14 @@ extension Dataset : DataSource, Sequence {
     subscript(index: Int) -> Point {
         return self.points[index]
     }
-
+    
     /// Index the receiver with the first element at index `0`, and the last at index `self.count - 1`, returning an ArraySlice<Point> over a provided Range<Int> of indices
-    subscript(subRange: Range<Int>) -> ArraySlice<Point> {
+    subscript(subRange: CountableRange<Int>) -> ArraySlice<Point> {
+        return self.points[subRange]
+    }
+    
+    /// Index the receiver with the first element at index `0`, and the last at index `self.count - 1`, returning an ArraySlice<Point> over a provided Range<Int> of indices
+    subscript(subRange: CountableClosedRange<Int>) -> ArraySlice<Point> {
         return self.points[subRange]
     }
 	
