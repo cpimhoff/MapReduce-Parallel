@@ -16,6 +16,7 @@
 		CB05C1B21ED22B7A00EC8CBB /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB05C1B11ED22B7A00EC8CBB /* Map.swift */; };
 		CB05C1B41ED22B8100EC8CBB /* Reduce.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB05C1B31ED22B8100EC8CBB /* Reduce.swift */; };
 		CB05C1BD1ED23A4700EC8CBB /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB05C1BC1ED23A4700EC8CBB /* MapTests.swift */; };
+		CB17F06F1EDE042200555F33 /* PriorityQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB17F06E1EDE042200555F33 /* PriorityQueue.swift */; };
 		CB4679111EDC00A3004C4CC4 /* Dataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4679101EDC00A3004C4CC4 /* Dataset.swift */; };
 		CB4679131EDC00AF004C4CC4 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4679121EDC00AF004C4CC4 /* Point.swift */; };
 		CB71741B1ED284EB00C0B439 /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB71741A1ED284EB00C0B439 /* SynchronizedArray.swift */; };
@@ -59,6 +60,7 @@
 		CB05C1BA1ED23A4700EC8CBB /* MapReduceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MapReduceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB05C1BC1ED23A4700EC8CBB /* MapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTests.swift; sourceTree = "<group>"; };
 		CB05C1BE1ED23A4700EC8CBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CB17F06E1EDE042200555F33 /* PriorityQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriorityQueue.swift; sourceTree = "<group>"; };
 		CB4679101EDC00A3004C4CC4 /* Dataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dataset.swift; sourceTree = "<group>"; };
 		CB4679121EDC00AF004C4CC4 /* Point.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		CB71741A1ED284EB00C0B439 /* SynchronizedArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				CBCEEF271EDBD3FE00DD9678 /* KNN_main.swift */,
 				CB4679101EDC00A3004C4CC4 /* Dataset.swift */,
 				CB4679121EDC00AF004C4CC4 /* Point.swift */,
+				CB17F06E1EDE042200555F33 /* PriorityQueue.swift */,
 			);
 			path = KNN;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				CBCEEF191EDBD22100DD9678 /* ViewController.swift in Sources */,
 				CB4679111EDC00A3004C4CC4 /* Dataset.swift in Sources */,
 				CBCEEF171EDBD22100DD9678 /* AppDelegate.swift in Sources */,
+				CB17F06F1EDE042200555F33 /* PriorityQueue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
