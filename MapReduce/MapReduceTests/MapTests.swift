@@ -34,8 +34,8 @@ class MapTests: XCTestCase {
 	}
 	
     func testParallelMap() {
-		var results : [String]?
-		var expected : [String]?
+		var results : [String]!
+		var expected : [String]!
 
 		// performance is roughly = workTime * (datasetSize / max_threads)
 		self.measure {
@@ -49,12 +49,12 @@ class MapTests: XCTestCase {
 		// accuracy assurance
 		expected = self.data.map { x in "\(x)" }
 		
-		XCTAssertEqual(results!, expected!)
+		XCTAssertEqual(results, expected)
 	}
 	
 	func testParallelMapChunked() {
-		var results : [String]?
-		var expected : [String]?
+		var results : [String]!
+		var expected : [String]!
 		
 		// performance is roughly = workTime * (datasetSize / max_threads)
 		self.measure {
@@ -68,7 +68,7 @@ class MapTests: XCTestCase {
 		// accuracy assurance
 		expected = self.data.map { x in "\(x)" }
 		
-		XCTAssertEqual(results!, expected!)
+		XCTAssertEqual(results, expected)
 	}
     
 }
