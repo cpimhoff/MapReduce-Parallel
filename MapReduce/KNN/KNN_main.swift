@@ -9,14 +9,38 @@
 import Foundation
 import MapReduce
 
-let K : Int = 10
-
 func main(k: Int) {
 	printToAppConsole("Hello World! \(k)")
-	
-	// here's how to initialize the bundled datasets
-	let test = Dataset.init(.test)
-	let train = Dataset.init(.training)
+    
+    var dataFilepath = Bundle.main.path(forResource: "train_data", ofType: "txt")!
+    var labelFilepath = Bundle.main.path(forResource: "train_labels", ofType: "txt")!
+    let train_data = Dataset(dataFilepath: dataFilepath,
+                             labelFilepath: labelFilepath)
+
+    dataFilepath = Bundle.main.path(forResource: "test_data", ofType: "txt")!
+    labelFilepath = Bundle.main.path(forResource: "test_labels", ofType: "txt")!
+    let test_data = Dataset(dataFilepath: dataFilepath,
+                            labelFilepath: labelFilepath)
+
+    // results is a mapping of [subset_index : CD], where CD is a two
+    // dimensional array. Each row is associated with a test point, and
+    // contains the k nearest neighbors from the train data
+    var results = [[(label: Int, dist: Float)]]()
+    results = map(test_data) { test_point in
+        var cd = [(label: Int, dist: Float)!].init(repeating: nil, count: k)
+        let nn = knn(point: test_point, data: train_data, k: 10)
+        for n in 0..<k {
+            cd[n] = (label: nn[n].label, dist: nn[n].dist)
+        }
+        
+        return cd
+    }
+
+    for result in results {
+        for neighbor in result {
+            printToAppConsole("class: \(neighbor.label)")
+        }
+    }
 }
 
 // Brute force kNN for a single point, it's garbage but for now we just need a
