@@ -25,7 +25,7 @@ class ReduceTests: XCTestCase {
 	func testBruteReduce() {
 		// performance is roughly = (workTime * datasetSize)
 		self.measure {
-			let _ = self.data.reduce(0) {	// built in `map` implementation is synchronous
+			let _ = self.data.reduce(0) {	// built in `reduce` implementation is synchronous
 				sum, next -> Int in
 				Thread.sleep(forTimeInterval: artificialWorkTime)
 				return sum + next
