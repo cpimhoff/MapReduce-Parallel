@@ -22,6 +22,16 @@ func main(k: Int) {
     let test_data = Dataset(dataFilepath: dataFilepath,
                             labelFilepath: labelFilepath)
 
+    let results = mapKnn(train: train_data, test: test_data, k: k)
+    
+    for result in results {
+        for neighbor in result {
+            printToAppConsole("class: \(neighbor.label)")
+        }
+    }
+}
+
+func mapKnn(train train_data: Dataset, test test_data: Dataset, k: Int) -> [[(label: Int, dist: Float)]] {
     // results is a mapping of [subset_index : CD], where CD is a two
     // dimensional array. Each row is associated with a test point, and
     // contains the k nearest neighbors from the train data
@@ -35,12 +45,8 @@ func main(k: Int) {
         
         return cd
     }
-
-    for result in results {
-        for neighbor in result {
-            printToAppConsole("class: \(neighbor.label)")
-        }
-    }
+    
+    return results
 }
 
 // Brute force kNN for a single point, it's garbage but for now we just need a
