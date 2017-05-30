@@ -11,36 +11,29 @@ import MapReduce
 
 func main(k: Int) {
 	printToAppConsole("Hello World! \(k)")
-    
-    var dataFilepath = Bundle.main.path(forResource: "train_data", ofType: "txt")!
-    var labelFilepath = Bundle.main.path(forResource: "train_labels", ofType: "txt")!
-    let train_data = Dataset(dataFilepath: dataFilepath,
-                             labelFilepath: labelFilepath)
-
-    dataFilepath = Bundle.main.path(forResource: "test_data", ofType: "txt")!
-    labelFilepath = Bundle.main.path(forResource: "test_labels", ofType: "txt")!
-    let test_data = Dataset(dataFilepath: dataFilepath,
-                            labelFilepath: labelFilepath)
+	
+    let train_data = Dataset(.training)
+    let test_data = Dataset(.test)
 
     let results = mapKnn(train: train_data, test: test_data, k: k)
     
     for result in results {
         for neighbor in result {
-            printToAppConsole("class: \(neighbor.label)")
+            printToAppConsole("class: \(neighbor)")
         }
     }
 }
 
-func mapKnn(train train_data: Dataset, test test_data: Dataset, k: Int) -> [[(label: Int, dist: Float)]] {
+func mapKnn(train train_data: Dataset, test test_data: Dataset, k: Int) -> [[Int]] {
     // results is a mapping of [subset_index : CD], where CD is a two
     // dimensional array. Each row is associated with a test point, and
     // contains the k nearest neighbors from the train data
-    var results = [[(label: Int, dist: Float)]]()
+    var results = [[Int]]()
     results = map(test_data) { test_point in
-        var cd = [(label: Int, dist: Float)!].init(repeating: nil, count: k)
+        var cd = [Int!].init(repeating: nil, count: k)
         let nn = knn(point: test_point, data: train_data, k: 10)
         for n in 0..<k {
-            cd[n] = (label: nn[n].label, dist: nn[n].dist)
+            cd[n] = nn[n]
         }
         
         return cd
@@ -51,15 +44,17 @@ func mapKnn(train train_data: Dataset, test test_data: Dataset, k: Int) -> [[(la
 
 // Brute force kNN for a single point, it's garbage but for now we just need a
 // proof of concept
-func knn(point: Point, data: Dataset, k: Int) -> [(label: Int, dist: Float)] {
-    var cd = [(label: Int, dist: Float)]()
+func knn(point: Point, data: Dataset, k: Int) -> [Int] {
+	var cdprior = PriorityQueue<PrioritizedElement<Int>>()
     
     // find distance to each point
     for train_point in data {
-        cd.append((point.label, point - train_point))
+		let dist = point - train_point
+		let element = PrioritizedElement(data: point.label, priority: dist)
+        cdprior.push(element)
     }
     
     // find the k closest points
-    cd.sort(by: { p1, p2 in p1.dist > p2.dist })
-    return Array(cd.prefix(k))
+	let result = Array(cdprior.prefix(k))
+	return result.map { $0.data }
 }
