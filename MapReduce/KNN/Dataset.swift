@@ -16,6 +16,18 @@ class Dataset {
     init(points: [Point]) {
         self.points = points
     }
+	
+	enum BundledSet : String { case training = "train", test = "test" }
+	/// Initialize a Dataset from the data files packaged alongside this app,
+	/// either the training set or the test set
+	convenience init(_ source: Dataset.BundledSet) {
+		let base = source.rawValue
+		
+		let dataPath = Bundle.main.path(forResource: "\(base)_data", ofType: "txt")!
+		let trainPath = Bundle.main.path(forResource: "\(base)_labels", ofType: "txt")!
+		
+		self.init(dataFilepath: dataPath, labelFilepath: trainPath)
+	}
     
     /// Loads a CSV dataset into memory from a file, as well as another file storing class labels for each datapoint
     convenience init(dataFilepath: String, labelFilepath: String) {

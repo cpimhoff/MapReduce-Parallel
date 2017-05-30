@@ -318,10 +318,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28E601781EDD1E7D0056B522 /* train_data.txt in Resources */,
 				CBCEEF1B1EDBD22100DD9678 /* Assets.xcassets in Resources */,
-				28E601761EDD1E7D0056B522 /* test_data.txt in Resources */,
 				CBCEEF1E1EDBD22100DD9678 /* Main.storyboard in Resources */,
+				28E601781EDD1E7D0056B522 /* train_data.txt in Resources */,
+				28E601761EDD1E7D0056B522 /* test_data.txt in Resources */,
 				28E601791EDD1E7D0056B522 /* train_labels.txt in Resources */,
 				28E601771EDD1E7D0056B522 /* test_labels.txt in Resources */,
 			);

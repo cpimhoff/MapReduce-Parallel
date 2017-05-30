@@ -35,6 +35,7 @@ func clearAppConsole() {
 	ViewController.consoleTextBox.stringValue = ""
 }
 
-func printToAppConsole(_ text: String) {
-	ViewController.consoleTextBox.stringValue += (text + "\n")
+func printToAppConsole(_ obj: Any) {
+	let description = String(describing: obj)
+	ViewController.consoleTextBox.stringValue += (description + "\n")
 }
