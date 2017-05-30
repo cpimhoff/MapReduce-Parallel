@@ -9,8 +9,8 @@
 import XCTest
 import MapReduce
 
-private let artificialWorkTime : TimeInterval = 0.001
-private let datasetSize : Int = 1_000
+private let artificialWorkTime : TimeInterval = 0.00001
+private let datasetSize : Int = 100_000
 
 class MapTests: XCTestCase {
 	
@@ -33,19 +33,38 @@ class MapTests: XCTestCase {
 		}
 	}
 	
-    func testMap() {
+    func testParallelMap() {
 		var results : [String]?
 		var expected : [String]?
 
 		// performance is roughly = workTime * (datasetSize / max_threads)
 		self.measure {
-			results = map(self.data) {
+			results = self.data.parallelMap {
 				x in
 				Thread.sleep(forTimeInterval: artificialWorkTime)
 				return "\(x)"
 			}
 		}
 	
+		// accuracy assurance
+		expected = self.data.map { x in "\(x)" }
+		
+		XCTAssertEqual(results!, expected!)
+	}
+	
+	func testParallelMapChunked() {
+		var results : [String]?
+		var expected : [String]?
+		
+		// performance is roughly = workTime * (datasetSize / max_threads)
+		self.measure {
+			results = self.data.parallelMapChunked {
+				x in
+				Thread.sleep(forTimeInterval: artificialWorkTime)
+				return "\(x)"
+			}
+		}
+		
 		// accuracy assurance
 		expected = self.data.map { x in "\(x)" }
 		
