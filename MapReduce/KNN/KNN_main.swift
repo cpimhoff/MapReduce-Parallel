@@ -11,4 +11,8 @@ import MapReduce
 
 func main(k: Int) {
 	printToAppConsole("Hello World! \(k)")
+	
+	// here's how to initialize the bundled datasets
+	let test = Dataset.init(.test)
+	let train = Dataset.init(.training)
 }
