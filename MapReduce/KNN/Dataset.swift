@@ -11,27 +11,35 @@ import MapReduce
 
 class Dataset {
 	
-	let points : [Point]
-	
-	init(points: [Point]) {
-		self.points = points
-	}
-	
-	/// Loads a CSV dataset into memory from a file
-	convenience init(filepath: String) {
-		let contents = try! String(contentsOfFile: filepath)
-		
-		var points = [Point]()
-		for line in contents.components(separatedBy: .newlines) {
-			if line.isEmpty { continue }
-			
-			let featureValues = line.components(separatedBy: ",").map { Int($0)! }
-			let point = Point(features: featureValues)
-			points.append(point)
-		}
-		
-		self.init(points: points)
-	}
+    let points : [Point]
+    
+    init(points: [Point]) {
+        self.points = points
+    }
+    
+    /// Loads a CSV dataset into memory from a file, as well as another file storing class labels for each datapoint
+    convenience init(dataFilepath: String, labelFilepath: String) {
+        let dataContents = try! String(contentsOfFile: dataFilepath)
+        let labelContents = try! String(contentsOfFile: labelFilepath)
+        
+        let dataLines = dataContents.components(separatedBy: .newlines)
+        let labelLines = labelContents.components(separatedBy: .newlines)
+        
+        var points = [Point]()
+        for i in 0..<dataLines.count {
+            let dataLine = dataLines[i]
+            let labelLine = labelLines[i]
+
+            if dataLine.isEmpty || labelLine.isEmpty { continue }
+            
+            let featureValues = dataLine.components(separatedBy: ",").map { Int($0)! }
+            let label = Int(labelLine)!
+            let point = Point(features: featureValues, label: label)
+            points.append(point)
+        }
+        
+        self.init(points: points)
+    }
 	
 }
 
