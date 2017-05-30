@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28E601761EDD1E7D0056B522 /* test_data.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28E601721EDD1E7D0056B522 /* test_data.txt */; };
+		28E601771EDD1E7D0056B522 /* test_labels.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28E601731EDD1E7D0056B522 /* test_labels.txt */; };
+		28E601781EDD1E7D0056B522 /* train_data.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28E601741EDD1E7D0056B522 /* train_data.txt */; };
+		28E601791EDD1E7D0056B522 /* train_labels.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28E601751EDD1E7D0056B522 /* train_labels.txt */; };
 		CB05C1A91ED22AA100EC8CBB /* MapReduce.h in Headers */ = {isa = PBXBuildFile; fileRef = CB05C1A71ED22AA100EC8CBB /* MapReduce.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CB05C1B01ED22AD900EC8CBB /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB05C1AF1ED22AD900EC8CBB /* DataSource.swift */; };
 		CB05C1B21ED22B7A00EC8CBB /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB05C1B11ED22B7A00EC8CBB /* Map.swift */; };
@@ -42,6 +46,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		28E601721EDD1E7D0056B522 /* test_data.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test_data.txt; path = data/test_data.txt; sourceTree = "<group>"; };
+		28E601731EDD1E7D0056B522 /* test_labels.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test_labels.txt; path = data/test_labels.txt; sourceTree = "<group>"; };
+		28E601741EDD1E7D0056B522 /* train_data.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = train_data.txt; path = data/train_data.txt; sourceTree = "<group>"; };
+		28E601751EDD1E7D0056B522 /* train_labels.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = train_labels.txt; path = data/train_labels.txt; sourceTree = "<group>"; };
 		CB05C1A41ED22AA100EC8CBB /* MapReduce.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MapReduce.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB05C1A71ED22AA100EC8CBB /* MapReduce.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapReduce.h; sourceTree = "<group>"; };
 		CB05C1A81ED22AA100EC8CBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -90,6 +98,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		28E601711EDD1E680056B522 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				28E601721EDD1E7D0056B522 /* test_data.txt */,
+				28E601731EDD1E7D0056B522 /* test_labels.txt */,
+				28E601741EDD1E7D0056B522 /* train_data.txt */,
+				28E601751EDD1E7D0056B522 /* train_labels.txt */,
+			);
+			name = data;
+			sourceTree = "<group>";
+		};
 		CB05C19A1ED22AA100EC8CBB = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +163,7 @@
 		CBCEEF151EDBD22100DD9678 /* KNN */ = {
 			isa = PBXGroup;
 			children = (
+				28E601711EDD1E680056B522 /* data */,
 				CBCEEF291EDBD40500DD9678 /* application wrapper */,
 				CBCEEF271EDBD3FE00DD9678 /* KNN_main.swift */,
 				CB4679101EDC00A3004C4CC4 /* Dataset.swift */,
@@ -298,8 +318,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28E601781EDD1E7D0056B522 /* train_data.txt in Resources */,
 				CBCEEF1B1EDBD22100DD9678 /* Assets.xcassets in Resources */,
+				28E601761EDD1E7D0056B522 /* test_data.txt in Resources */,
 				CBCEEF1E1EDBD22100DD9678 /* Main.storyboard in Resources */,
+				28E601791EDD1E7D0056B522 /* train_labels.txt in Resources */,
+				28E601771EDD1E7D0056B522 /* test_labels.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
