@@ -82,7 +82,7 @@ struct DatasetIterator : IteratorProtocol {
     }
 
     mutating func next() -> Point? {
-        if index < dataset.count {
+        if index < dataset.count - 1 {
             index += 1
             return dataset[index]
         } else {
