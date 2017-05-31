@@ -36,6 +36,28 @@ func main_brute(k: Int) {
     printToAppConsole("percent correct: \(Float(numCorrect) / Float(test_data.count))")
 }
 
+/// Brute force kNN for a single point, to compare to our parallel function
+///
+/// - Parameters:
+///   - point: the point to find the kNN of
+///   - data: the dataset to find neighbors within
+///   - k: number of nearest neighbors
+/// - Returns: an array of integers representing class labels
+func knn(point: Point, data: Dataset, k: Int) -> [Int] {
+    var nearestQueue = PriorityQueue<PrioritizedElement<Int>>()
+    
+    // find distance to each point
+    for train_point in data {
+        let dist = point - train_point
+        let element = PrioritizedElement(data: point.label!, priority: dist)
+        nearestQueue.push(element)
+    }
+    
+    // find the k closest points, return their labels
+    let result = Array(nearestQueue.prefix(k))
+    return result.map { $0.data }
+}
+
 /// Finds the class label with the highest number of votes.
 ///
 /// - Parameter result: array of Ints storing votes for class labels
@@ -64,26 +86,4 @@ func majorityVote(result: [Int]) -> Int {
     }
     
     return maxLabel
-}
-
-/// Brute force kNN for a single point, to compare to our parallel function
-///
-/// - Parameters:
-///   - point: the point to find the kNN of
-///   - data: the dataset to find neighbors within
-///   - k: number of nearest neighbors
-/// - Returns: an array of integers representing class labels
-func knn(point: Point, data: Dataset, k: Int) -> [Int] {
-    var nearestQueue = PriorityQueue<PrioritizedElement<Int>>()
-    
-    // find distance to each point
-    for train_point in data {
-        let dist = point - train_point
-        let element = PrioritizedElement(data: point.label!, priority: dist)
-        nearestQueue.push(element)
-    }
-    
-    // find the k closest points, return their labels
-    let result = Array(nearestQueue.prefix(k))
-    return result.map { $0.data }
 }
