@@ -1,6 +1,6 @@
 //
 //  PriorityQueue.swift
-//  LSH
+//	MapReduce
 //
 
 import Foundation

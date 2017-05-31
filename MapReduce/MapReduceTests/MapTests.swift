@@ -1,9 +1,6 @@
 //
 //  MapTests.swift
-//  MapTests
-//
-//  Created by Charlie Imhoff on 5/21/17.
-//  Copyright © 2017 Charlie Imhoff. All rights reserved.
+//  MapReduceTests
 //
 
 import XCTest
