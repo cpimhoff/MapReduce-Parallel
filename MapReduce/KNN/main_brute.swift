@@ -1,9 +1,6 @@
 //
-//  KNN_main_brute.swift
+//  main_brute.swift
 //  MapReduce
-//
-//  Created by Charlie Imhoff on 5/31/17.
-//  Copyright © 2017 Charlie Imhoff. All rights reserved.
 //
 
 import Foundation
@@ -59,11 +56,11 @@ func main_brute(k: Int) {
     printToAppConsole("percent correct: \(Float(numCorrect) / Float(test_data.count))")
 }
 
-/// Brute force kNN for a single point, to compare to our pretty function
+/// Brute force kNN for a single point, to compare to our parallel function
 ///
 /// - Parameters:
-///   - point: <#point description#>
-///   - data: <#data description#>
+///   - point: the point to find the kNN of
+///   - data: the dataset to find neighbors within
 ///   - k: number of nearest neighbors
 /// - Returns: an array of integers representing class labels
 func knn(point: Point, data: Dataset, k: Int) -> [Int] {

@@ -1,5 +1,5 @@
 //
-//  KNN_main.swift
+//  main_parallel.swift
 //  MapReduce
 //
 
@@ -30,14 +30,11 @@ func main_parallel(k: Int) {
     printToAppConsole("percent correct: \(Float(numCorrect) / Float(test_data.count))")
 }
 
-/// Uses our asynchronous map function to map each training point to a class
-/// label and distance.
+/// Uses our asynchronous map function to map each training point
+/// to a class label and distance (`MappedPoint`). Collect these in a `MappedMatrix`.
 ///
-/// - Parameters:
-///   - train_data: <#train_data description#>
-///   - test_data: <#test_data description#>
-/// - Returns: a MappedSet storing the mapped training data for each test point
-func mapKnn(train train_data: Dataset, test test_data: Dataset) -> MappedSet {
+/// - Returns: a `MappedSet` storing the mapped training data for each test point.
+func mapKnn(train train_data: Dataset, test test_data: Dataset) -> MappedMatrix {
     
     var results = [[[MappedPoint]]]()
     
@@ -49,18 +46,17 @@ func mapKnn(train train_data: Dataset, test test_data: Dataset) -> MappedSet {
         })
     }
 
-    return MappedSet(points: results)
+    return MappedMatrix(rawArray: results)
 }
 
 
-/// <#Description#>
+/// Reduce the given test points and training data distances to estimated class labels for each point.
 ///
 /// - Parameters:
-///   - test_data: <#test_data description#>
-///   - train_data: <#train_data description#>
-///   - k: <#k description#>
-/// - Returns: <#return value description#>
-func reduceKnn(test test_data: Dataset, train train_data: MappedSet, k: Int) -> [Int] {
+///   - test_data: The dataset of values to assign labels to
+///   - train_data: A matrix containing test points, and their distances to training points 
+/// - Returns: an array of integers representing class labels
+func reduceKnn(test test_data: Dataset, train train_data: MappedMatrix, k: Int) -> [Int] {
     var labels = [Int!].init(repeating: nil, count: test_data.count)
     for i in 0..<test_data.count {
         // merge two arrays of MappedPoints together
