@@ -28,6 +28,8 @@
 		CBCEEF1E1EDBD22100DD9678 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBCEEF1C1EDBD22100DD9678 /* Main.storyboard */; };
 		CBCEEF261EDBD23F00DD9678 /* MapReduce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB05C1A41ED22AA100EC8CBB /* MapReduce.framework */; };
 		CBCEEF281EDBD3FE00DD9678 /* main_parallel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCEEF271EDBD3FE00DD9678 /* main_parallel.swift */; };
+		CBDE8FD71EDF634900A937F3 /* MapReduce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB05C1A41ED22AA100EC8CBB /* MapReduce.framework */; };
+		CBDE8FD81EDF634900A937F3 /* MapReduce.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CB05C1A41ED22AA100EC8CBB /* MapReduce.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CBF353B81ED67BB60081B154 /* ReduceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF353B71ED67BB60081B154 /* ReduceTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +49,20 @@
 			remoteInfo = MapReduce;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CBDE8FD91EDF634900A937F3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CBDE8FD81EDF634900A937F3 /* MapReduce.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		28DD05381EDE5E07005DFA69 /* MappedMatrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappedMatrix.swift; sourceTree = "<group>"; };
@@ -98,6 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBDE8FD71EDF634900A937F3 /* MapReduce.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +267,7 @@
 				CBCEEF101EDBD22100DD9678 /* Sources */,
 				CBCEEF111EDBD22100DD9678 /* Frameworks */,
 				CBCEEF121EDBD22100DD9678 /* Resources */,
+				CBDE8FD91EDF634900A937F3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -273,8 +291,9 @@
 				TargetAttributes = {
 					CB05C1A31ED22AA100EC8CBB = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = WNZEWX34Q6;
 						LastSwiftMigration = 0820;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					CB05C1B91ED23A4700EC8CBB = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -501,10 +520,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = WNZEWX34Q6;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -526,10 +545,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = WNZEWX34Q6;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -575,8 +594,10 @@
 		CBCEEF211EDBD22100DD9678 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = WNZEWX34Q6;
 				INFOPLIST_FILE = KNN/Info.plist;
@@ -584,6 +605,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.carleton.datamining.charlieben.MapReduce;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -591,8 +613,10 @@
 		CBCEEF221EDBD22100DD9678 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = WNZEWX34Q6;
 				INFOPLIST_FILE = KNN/Info.plist;
@@ -600,6 +624,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.carleton.datamining.charlieben.MapReduce;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
