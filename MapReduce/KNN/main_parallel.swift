@@ -18,8 +18,10 @@ func main_parallel(k: Int) {
         let nearestNeighbors = reduceKnn(data: mappedPoint, k: k)
         labels[i] = majorityVote(result: nearestNeighbors)
     }
-
-    // calculate the accuracy of the program
+    
+    // calculate the accuracy of the program. We're using a test set of 100 1s,
+    // followed by 100 2s, followed by 100 7s. This is mostly to ensure that
+    // our implementations are valid, not to optimize for higher accuracy.
     var numCorrect : Int = 0
     for i in 0..<test_data.count {
         let label = labels[i]
