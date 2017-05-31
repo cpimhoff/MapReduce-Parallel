@@ -10,14 +10,20 @@ func main_parallel(k: Int) {
     let test_data = Dataset(.test)
     let train_data = Dataset(.training)
 
-    let mappedPoints = mapKnn(train: train_data, test: test_data)
-    let labels = reduceKnn(test: test_data, train: mappedPoints, k: k)
+    // map and reduce points
+    var labels = [Int!].init(repeating: nil, count: test_data.count)
+    for i in 0..<test_data.count {
+        let point = test_data[i]
+        let mappedPoint = mapKnn(point: point, train: train_data)
+        let nearestNeighbors = reduceKnn(data: mappedPoint, k: k)
+        labels[i] = majorityVote(result: nearestNeighbors)
+    }
 
     // calculate the accuracy of the program
     var numCorrect : Int = 0
     for i in 0..<test_data.count {
         let label = labels[i]
-        // ugly unfolded if necessary because of compiler optimizations
+        // ugly unfolded if is necessary because of compiler optimizations
         if i < 100 && label == 1 {
             numCorrect += 1
         } else if i < 200 && label == 2 {
@@ -34,84 +40,90 @@ func main_parallel(k: Int) {
 /// label and distance.
 ///
 /// - Parameters:
-///   - train_data: <#train_data description#>
-///   - test_data: <#test_data description#>
+///   - test_data: points to be classified
+///   - train_data: training points used to classify the test points
 /// - Returns: a MappedSet storing the mapped training data for each test point
-func mapKnn(train train_data: Dataset, test test_data: Dataset) -> MappedSet {
-    
-    var results = [[[MappedPoint]]]()
-    
+func mapKnn(point test_point: Point, train train_data: Dataset) -> MappedSet {
     // use map to find the distance to each other point, in parallel
-    for point in test_data {
-        results.append(train_data.parallelMapChunked {
-            train_point -> [MappedPoint] in
-            return [MappedPoint(label: train_point.label!, dist: point - train_point)]
-        })
+    let result = train_data.parallelMapChunked {
+        train_point -> [MappedPoint] in
+        return [MappedPoint(label: train_point.label!,
+                            dist: test_point - train_point)]
     }
 
-    return MappedSet(points: results)
+    return MappedSet(points: result)
 }
 
 
-/// <#Description#>
+/// Finds the k nearest neighbors of each test point.
 ///
 /// - Parameters:
-///   - test_data: <#test_data description#>
-///   - train_data: <#train_data description#>
-///   - k: <#k description#>
-/// - Returns: <#return value description#>
-func reduceKnn(test test_data: Dataset, train train_data: MappedSet, k: Int) -> [Int] {
-    var labels = [Int!].init(repeating: nil, count: test_data.count)
-    for i in 0..<test_data.count {
-        // merge two arrays of MappedPoints together
-        let result = train_data[i].parallelReduce { nn1, nn2 in
-            var mergedPoints = [MappedPoint]()
-            var index1 = 0
-            var index2 = 0
-            for _ in 0..<k {
-                if index1 >= nn1.count {
-                    if index2 < nn2.count {
-                        mergedPoints.append(nn2[index2])
-                        index2 += 1
-                    }
-                } else if index2 >= nn2.count {
-                    mergedPoints.append(nn1[index1])
-                    index1 += 1
-                } else if nn1[index1].dist < nn2[index2].dist {
-                    mergedPoints.append(nn1[index1])
-                    index1 += 1
-                } else {
+///   - test_data: points to be classified
+///   - train_data: training points used to classify the test points
+///   - k: number of nearest neighbors
+/// - Returns: a two dimensional array of nearest neighbors
+func reduceKnn(data train_data: MappedSet, k: Int) -> [MappedPoint] {
+    // merge two sorted arrays of MappedPoints together
+    let result = train_data.parallelReduce { nn1, nn2 in
+        var mergedPoints = [MappedPoint]()
+        var index1 = 0
+        var index2 = 0
+        
+        // only merge the first k points, since we never care about more
+        for _ in 0..<k {
+            // walk through the two arrays, adding the closest point at
+            // each step
+            // we have to unroll the if statement into more cases than
+            // appears necessary because of compiler optimizations
+            if index1 >= nn1.count {
+                if index2 < nn2.count {
                     mergedPoints.append(nn2[index2])
                     index2 += 1
                 }
-            }
-            return mergedPoints
-        }
-        
-        // vote for class label
-        var nearbyLabels = [Int:Int]()
-        for point in result {
-            if nearbyLabels[point.label] == nil {
-                nearbyLabels[point.label] = 1
+            } else if index2 >= nn2.count {
+                mergedPoints.append(nn1[index1])
+                index1 += 1
+            } else if nn1[index1].dist < nn2[index2].dist {
+                mergedPoints.append(nn1[index1])
+                index1 += 1
             } else {
-                nearbyLabels[point.label]! += 1
+                mergedPoints.append(nn2[index2])
+                index2 += 1
             }
         }
-
-        // find label with most votes
-        var maxLabel : Int = -1
-        var maxCount : Int = 0
-        for (label, count) in nearbyLabels {
-            if count > maxCount {
-                maxLabel = label
-                maxCount = count
-            } else if count == maxCount {
-                maxLabel = label < maxLabel ? label : maxLabel
-            }
-        }
-        
-        labels[i] = maxLabel
+        return mergedPoints
     }
     
-    return labels
+    return result
+}
+
+/// Finds the class label with the highest number of votes.
+///
+/// - Parameter result: array of Ints storing votes for class labels
+/// - Returns: the class label with the highest number of votes
+func majorityVote(result: [MappedPoint]) -> Int {
+    // vote for class label
+    var nearbyLabels = [Int:Int]()
+    for point in result {
+        let label = point.label
+        if nearbyLabels[label] == nil {
+            nearbyLabels[label] = 1
+        } else {
+            nearbyLabels[label]! += 1
+        }
+    }
+    
+    // find label with most votes
+    var maxLabel : Int = -1
+    var maxCount : Int = 0
+    for (label, count) in nearbyLabels {
+        if count > maxCount {
+            maxLabel = label
+            maxCount = count
+        } else if count == maxCount {
+            maxLabel = label < maxLabel ? label : maxLabel
+        }
+    }
+    
+    return maxLabel
 }
