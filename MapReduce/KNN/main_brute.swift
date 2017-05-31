@@ -72,7 +72,7 @@ func majorityVote(result: [Int]) -> Int {
 ///   - k: number of nearest neighbors
 /// - Returns: an array of integers representing class labels
 func knn(point: Point, data: Dataset, k: Int) -> [Int] {
-    var nearestQueue = PriorityQueue<PrioritizedElement<Int>>()
+    var nearestQueue = PriorityQueue<PrioritizedElement<Int>>(ascending: true)
     
     // find distance to each point
     for train_point in data {
