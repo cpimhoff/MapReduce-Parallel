@@ -13,12 +13,15 @@ class ViewController: NSViewController {
 	@IBOutlet weak var kField : NSTextField!
 	@IBOutlet weak var progressIndicator : NSProgressIndicator!
 	
+	@IBOutlet weak var statusLabel : NSTextField!
+	
 	@IBOutlet weak var runParallelButton : NSButton!
 	@IBOutlet weak var runBruteButton : NSButton!
 
 	override func viewDidLoad() {
 		ViewController.consoleTextBox = self.textBox
 		self.textBox.string = ""
+		self.statusLabel.stringValue = ""
 		self.progressIndicator.isDisplayedWhenStopped = false
 	}
 	
@@ -40,14 +43,17 @@ class ViewController: NSViewController {
 			runBruteButton!.isEnabled = false
 			
 			// dispatch KNN off UI thread
+			let startTime = Date()
 			DispatchQueue.global(qos: .userInitiated).async {
 				block(k)
+				let duration = abs(startTime.timeIntervalSinceNow)
 				
 				// reenable UI after completion
 				DispatchQueue.main.sync {
 					self.progressIndicator.stopAnimation(self)
 					self.runParallelButton!.isEnabled = true
 					self.runBruteButton!.isEnabled = true
+					self.statusLabel.stringValue = String(format: "in %.2f seconds", duration)
 				}
 			}
 		} else {
