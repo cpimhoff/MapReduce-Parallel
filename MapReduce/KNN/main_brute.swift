@@ -17,21 +17,8 @@ func main_brute(k: Int) {
         labels[i] = majorityVote(result: result)
     }
     
-    // calculate the accuracy of the program
-    var numCorrect : Int = 0
-    for i in 0..<test_data.count {
-        let label = labels[i]
-        // ugly unfolded if is necessary because of compiler optimizations
-        if i < 100 && label == 1 {
-            numCorrect += 1
-        } else if i < 200 && label == 2 {
-            numCorrect += 1
-        } else if i < 300 && label == 7 {
-            numCorrect += 1
-        }
-    }
-    
-    printToAppConsole("percent correct: \(Float(numCorrect) / Float(test_data.count))")
+	// calculate the accuracy of the program, and print to console
+	printToAppConsole("percent correct: \(accuracy(of: labels, for: test_data))")
 }
 
 /// Finds the class label with the highest number of votes.

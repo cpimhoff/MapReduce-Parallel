@@ -19,21 +19,8 @@ func main_parallel(k: Int) {
         labels[i] = majorityVote(result: nearestNeighbors)
     }
 
-    // calculate the accuracy of the program
-    var numCorrect : Int = 0
-    for i in 0..<test_data.count {
-        let label = labels[i]
-        // ugly unfolded if is necessary because of compiler optimizations
-        if i < 100 && label == 1 {
-            numCorrect += 1
-        } else if i < 200 && label == 2 {
-            numCorrect += 1
-        } else if i < 300 && label == 7 {
-            numCorrect += 1
-        }
-    }
-    
-    printToAppConsole("percent correct: \(Float(numCorrect) / Float(test_data.count))")
+    // calculate the accuracy of the program, and print to console
+    printToAppConsole("percent correct: \(accuracy(of: labels, for: test_data))")
 }
 
 /// Uses our asynchronous map function to map each training point
@@ -125,4 +112,23 @@ func majorityVote(result: [MappedPoint]) -> Int {
     }
     
     return maxLabel
+}
+
+/// Returns the accuracy of the supplied labels against the test set.
+/// Our test set only includes points with labels 1,3,7, whose ranges are known.
+func accuracy(of labels: [Int], for set: Dataset) -> Float {
+	var numCorrect : Int = 0
+	for i in 0..<set.count {
+		let label = labels[i]
+		// ugly unfolded if is necessary because of compiler optimizations
+		if i < 100 && label == 1 {
+			numCorrect += 1
+		} else if i < 200 && label == 2 {
+			numCorrect += 1
+		} else if i < 300 && label == 7 {
+			numCorrect += 1
+		}
+	}
+	
+	return Float(numCorrect) / Float(set.count)
 }
