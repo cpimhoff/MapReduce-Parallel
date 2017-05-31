@@ -5,14 +5,17 @@
 
 import Foundation
 
-public extension DataSource {
+// Collections indexed with ascending integers can be mapped by our framework.
+public extension Collection where Self.Index == Int, Self.IndexDistance == Int {
+	
+	typealias Result = Element
 	
 	/// Returns the result of combining the elements of the reciever using the given closure.
 	/// - Note: Use in conjunction with `map` to modify an array of values `[S]` to a single value (of dissimilar type) `R`.
 	///
 	/// - Parameter merge: An _associative_ closure which combines two subresults into one
 	/// - Returns: The final result of merging all the items of the reciver.
-	func parallelReduce(_ merge: @escaping (DataPoint, DataPoint) -> DataPoint) -> DataPoint {
+	func parallelReduce(_ merge: @escaping (Element, Element) -> Result) -> Result {
 		let queue = DispatchQueue(label: "edu.carleton.chaz&ben.map", qos: .userInitiated,
 		                          attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil)
 		let all : Range<Int> = 0..<self.count
@@ -22,7 +25,7 @@ public extension DataSource {
 	}
 	
 	private func _parallelReduce(range: Range<Int>, onQueue queue: DispatchQueue,
-		 merge: @escaping (DataPoint, DataPoint) -> DataPoint) -> DataPoint {
+		 merge: @escaping (Element, Element) -> Result) -> Result {
 		
 		// base cases
 		if range.count == 1 {
@@ -43,8 +46,8 @@ public extension DataSource {
 		// asynchronously handle subcases
 		let batch = DispatchGroup()
 		
-		var lowerResult : DataPoint! = nil
-		var upperResult : DataPoint! = nil
+		var lowerResult : Result! = nil
+		var upperResult : Result! = nil
 		// async down to another thread to handle `lowerCut`
 		queue.async(group: batch) {
 			lowerResult = self._parallelReduce(range: lowerCut, onQueue: queue, merge: merge)

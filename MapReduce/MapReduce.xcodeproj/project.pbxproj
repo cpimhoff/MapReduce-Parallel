@@ -12,7 +12,6 @@
 		28E601781EDD1E7D0056B522 /* train_data.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28E601741EDD1E7D0056B522 /* train_data.txt */; };
 		28E601791EDD1E7D0056B522 /* train_labels.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28E601751EDD1E7D0056B522 /* train_labels.txt */; };
 		CB05C1A91ED22AA100EC8CBB /* MapReduce.h in Headers */ = {isa = PBXBuildFile; fileRef = CB05C1A71ED22AA100EC8CBB /* MapReduce.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CB05C1B01ED22AD900EC8CBB /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB05C1AF1ED22AD900EC8CBB /* DataSource.swift */; };
 		CB05C1B21ED22B7A00EC8CBB /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB05C1B11ED22B7A00EC8CBB /* Map.swift */; };
 		CB05C1B41ED22B8100EC8CBB /* Reduce.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB05C1B31ED22B8100EC8CBB /* Reduce.swift */; };
 		CB05C1BD1ED23A4700EC8CBB /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB05C1BC1ED23A4700EC8CBB /* MapTests.swift */; };
@@ -54,7 +53,6 @@
 		CB05C1A41ED22AA100EC8CBB /* MapReduce.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MapReduce.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB05C1A71ED22AA100EC8CBB /* MapReduce.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapReduce.h; sourceTree = "<group>"; };
 		CB05C1A81ED22AA100EC8CBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CB05C1AF1ED22AD900EC8CBB /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		CB05C1B11ED22B7A00EC8CBB /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		CB05C1B31ED22B8100EC8CBB /* Reduce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reduce.swift; sourceTree = "<group>"; };
 		CB05C1BA1ED23A4700EC8CBB /* MapReduceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MapReduceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,7 +132,6 @@
 		CB05C1A61ED22AA100EC8CBB /* MapReduce */ = {
 			isa = PBXGroup;
 			children = (
-				CB05C1AF1ED22AD900EC8CBB /* DataSource.swift */,
 				CB05C1B11ED22B7A00EC8CBB /* Map.swift */,
 				CB05C1B31ED22B8100EC8CBB /* Reduce.swift */,
 				CB71741A1ED284EB00C0B439 /* SynchronizedArray.swift */,
@@ -340,7 +337,6 @@
 				CB05C1B21ED22B7A00EC8CBB /* Map.swift in Sources */,
 				CB05C1B41ED22B8100EC8CBB /* Reduce.swift in Sources */,
 				CB71741B1ED284EB00C0B439 /* SynchronizedArray.swift in Sources */,
-				CB05C1B01ED22AD900EC8CBB /* DataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

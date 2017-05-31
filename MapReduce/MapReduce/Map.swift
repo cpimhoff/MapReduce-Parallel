@@ -8,7 +8,10 @@ import Foundation
 /// The maximum amount of threads to request from GCD in `parallelMapChunked`
 private let SPLIT_LIMIT = 300
 
-public extension DataSource {
+// Collections indexed with ascending integers can be mapped by our framework. 
+public extension Collection where Self.Index == Int, Self.IndexDistance == Int {
+	
+	typealias Element = Self.Iterator.Element
 	
 	/// Maps values of the reciever into new values using a provided mapping closure.
 	///
@@ -18,17 +21,17 @@ public extension DataSource {
 	/// - Parameters:
 	///   - mapping: A mapping closure from the points in the reciever to a new result
 	/// - Returns: An array containing (in order) the points from the reciever after mapping
-	func parallelMap<MappedPoint>
-		(_ mapping: @escaping (Self.DataPoint) -> MappedPoint) -> [MappedPoint] {
+	func parallelMap<MappedElement>
+		(_ mapping: @escaping (Element) -> MappedElement) -> [MappedElement] {
 		
 		// create empty results array of length `datasource.count`
-		let results = SynchronizedArray<MappedPoint!>.init(repeating: nil, count: self.count)
+		let results = SynchronizedArray<MappedElement!>.init(repeating: nil, count: self.count)
 		
 		// dispatch work to a concurrent queue, mapping items and saving them to `results`
 		let queue = DispatchQueue(label: "edu.carleton.chaz&ben.map", qos: .userInitiated,
 		                          attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil)
 		
-		for i in 0..<self.count {
+		for i in self.startIndex..<self.endIndex {
 			// pop a work block onto the queue for mapping a single item
 			queue.async {
 				// fetching the item is async as well, in case that is time intensive (such as on a DB)
@@ -54,11 +57,11 @@ public extension DataSource {
 	/// - Parameters:
 	///   - mapping: A mapping closure from the points in the reciever to a new result
 	/// - Returns: An array containing (in order) the points from the reciever after mapping
-	func parallelMapChunked<MappedPoint>
-		(_ mapping: @escaping (Self.DataPoint) -> MappedPoint) -> [MappedPoint] {
+	func parallelMapChunked<MappedElement>
+		(_ mapping: @escaping (Element) -> MappedElement) -> [MappedElement] {
 		
 		// create empty results array of length `datasource.count`
-		let results = SynchronizedArray<MappedPoint!>.init(repeating: nil, count: self.count)
+		let results = SynchronizedArray<MappedElement!>.init(repeating: nil, count: self.count)
 		
 		// dispatch work to a concurrent queue, mapping items and saving them to `results`
 		let queue = DispatchQueue(label: "edu.carleton.chaz&ben.map", qos: .userInitiated,
@@ -72,7 +75,7 @@ public extension DataSource {
 			// pop a work block onto the queue for mapping a chunk of items
 			queue.async {
 				let chunkStart = chunkIndex * chunkSize
-				let chunkEnd = min(chunkStart + chunkSize, self.count)
+				let chunkEnd = Swift.min(chunkStart + chunkSize, self.count)
 				
 				// map each item in the chunk
 				for itemIndex in chunkStart..<chunkEnd {
