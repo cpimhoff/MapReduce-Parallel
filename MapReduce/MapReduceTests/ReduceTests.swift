@@ -7,7 +7,7 @@ import XCTest
 import MapReduce
 
 private let artificialWorkTime : TimeInterval = 0.01
-private let datasetSize : Int = 10
+private let datasetSize : Int = 100
 
 class ReduceTests: XCTestCase {
 	
