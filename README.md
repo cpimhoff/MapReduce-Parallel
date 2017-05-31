@@ -12,6 +12,8 @@ A series of unit tests for our `MapReduce` framework are packaged in our Xcode p
 We used these unit testing tools heavily in understanding the performance of our functions across many use cases.
 
 ## Product: `KNN` App
-This Swift 3 project has been compiled and an application has been provided for convenience. It can be run like any other macOS application, simply by opening it.
+This app has been compiled and an application has been provided for convenience. It can be run like any other macOS application, simply by opening it.
 
 This application allows the user to run KNN via brute force or by utilizing our `MapReduce` framework. The KNN program comes bundled with a set of the handwritten digit data from HW1 and uses those for training and test data.
+
+> The KNN app isn’t a terminal program because our framework is non-static, and due to current ABI instability in Swift, terminal executables can’t embed dynamic frameworks.
