@@ -12,6 +12,9 @@ class ViewController: NSViewController {
 	@IBOutlet weak var textBox : NSTextView!
 	@IBOutlet weak var kField : NSTextField!
 	@IBOutlet weak var progressIndicator : NSProgressIndicator!
+	
+	@IBOutlet weak var runParallelButton : NSButton!
+	@IBOutlet weak var runBruteButton : NSButton!
 
 	override func viewDidLoad() {
 		ViewController.consoleTextBox = self.textBox
@@ -19,20 +22,32 @@ class ViewController: NSViewController {
 		self.progressIndicator.isDisplayedWhenStopped = false
 	}
 	
-	@IBAction func runKNN(_ sender: Any?) {
+	@IBAction func runParallelKNN(_ sender: Any?) {
+		runInAppConsole(sender, main_parallel(k:))
+	}
+	
+	@IBAction func runBruteKNN(_ sender: Any?) {
+		runInAppConsole(sender, main_brute(k:))
+	}
+	
+	private func runInAppConsole(_ sender: Any?, _ block: @escaping (Int)->()) {
 		clearAppConsole()
 		
 		if let k = Int(kField.stringValue), k > 0 {
-		
+			// disable UI
 			progressIndicator.startAnimation(self)
-			(sender as? NSButton)!.isEnabled = false
+			runParallelButton!.isEnabled = false
+			runBruteButton!.isEnabled = false
 			
+			// dispatch KNN off UI thread
 			DispatchQueue.global(qos: .userInitiated).async {
-				main(k: k)
+				block(k)
 				
+				// reenable UI after completion
 				DispatchQueue.main.sync {
 					self.progressIndicator.stopAnimation(self)
-					(sender as? NSButton)!.isEnabled = true
+					self.runParallelButton!.isEnabled = true
+					self.runBruteButton!.isEnabled = true
 				}
 			}
 		} else {
