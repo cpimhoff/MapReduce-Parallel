@@ -2,9 +2,6 @@
 //  Dataset.swift
 //  MapReduce
 //
-//  Created by Charlie Imhoff on 5/29/17.
-//  Copyright © 2017 Charlie Imhoff. All rights reserved.
-//
 
 import Foundation
 import MapReduce
@@ -56,49 +53,22 @@ class Dataset {
 }
 
 // Conform this structure to `DataSource` so our MapReduce framework can use it directly, and to `Sequence` to allow range-based for loops and iteration
-extension Dataset : DataSource, Sequence {
+extension Dataset : Collection {
 	
-	/// The amount of datapoints represented by the reciever.
-	var count : Int {
-		return self.points.count
+	var startIndex: Int {
+		return self.points.startIndex
 	}
 	
-    /// Index the receiver with the first element at index `0`, and the last at index `self.count - 1`
+	var endIndex : Int {
+		return self.points.endIndex
+	}
+	
+	func index(after i: Int) -> Int {
+		return i + 1
+	}
+	
     subscript(index: Int) -> Point {
         return self.points[index]
     }
-    
-    /// Index the receiver with the first element at index `0`, and the last at index `self.count - 1`, returning an ArraySlice<Point> over a provided Range<Int> of indices
-    subscript(subRange: CountableRange<Int>) -> ArraySlice<Point> {
-        return self.points[subRange]
-    }
-    
-    /// Index the receiver with the first element at index `0`, and the last at index `self.count - 1`, returning an ArraySlice<Point> over a provided Range<Int> of indices
-    subscript(subRange: CountableClosedRange<Int>) -> ArraySlice<Point> {
-        return self.points[subRange]
-    }
 	
-    /// An iterator over the Points in the Dataset
-    func makeIterator() -> DatasetIterator {
-        return DatasetIterator(dataset: self)
-    }
-}
-
-// Iterator so that Dataset can conform to `Sequence`
-struct DatasetIterator : IteratorProtocol {
-    var dataset: Dataset
-    var index = 0
-    
-    init(dataset: Dataset) {
-        self.dataset = dataset
-    }
-
-    mutating func next() -> Point? {
-        if index < dataset.count - 1 {
-            index += 1
-            return dataset[index]
-        } else {
-            return nil
-        }
-    }
 }

@@ -1,14 +1,14 @@
 //
-//  ConcurrentArray.swift
+//  SynchronizedArray.swift
 //  MapReduce
-//
-//  Created by Charlie Imhoff on 5/21/17.
-//  Copyright © 2017 Charlie Imhoff. All rights reserved.
 //
 
 import Foundation
 
-/// Thread-safe API for accessing a boxed Swift `Array` (which is not thread-safe by default)
+/// Thread safe box over a standard Swift array.
+///
+/// Adapted (and expanded upon) from:
+/// https://stackoverflow.com/a/28191539/3777491
 internal class SynchronizedArray<T> : ExpressibleByArrayLiteral {
 	
 	private var _array: [T]

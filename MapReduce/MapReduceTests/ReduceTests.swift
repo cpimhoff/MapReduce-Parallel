@@ -1,16 +1,13 @@
 //
 //  ReduceTests.swift
-//  MapReduce
-//
-//  Created by Charlie Imhoff on 5/24/17.
-//  Copyright © 2017 Charlie Imhoff. All rights reserved.
+//  MapReduceTests
 //
 
 import XCTest
 import MapReduce
 
-private let artificialWorkTime : TimeInterval = 0.1
-private let datasetSize : Int = 10
+private let artificialWorkTime : TimeInterval = 0.01
+private let datasetSize : Int = 100
 
 class ReduceTests: XCTestCase {
 	
