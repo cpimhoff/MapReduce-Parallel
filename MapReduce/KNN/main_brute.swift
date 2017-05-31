@@ -77,7 +77,7 @@ func knn(point: Point, data: Dataset, k: Int) -> [Int] {
     // find distance to each point
     for train_point in data {
         let dist = point - train_point
-        let element = PrioritizedElement(data: point.label!, priority: dist)
+        let element = PrioritizedElement(data: train_point.label!, priority: dist)
         nearestQueue.push(element)
     }
     
