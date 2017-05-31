@@ -12,34 +12,109 @@ import MapReduce
 func main(k: Int) {
 	printToAppConsole("Hello World! \(k)")
 	
-    let train_data = Dataset(.training)
     let test_data = Dataset(.test)
+    let train_data = Dataset(.training)
 
-    let results = mapKnn(train: train_data, test: test_data, k: k)
+    let mappedPoints = mapKnn(train: train_data, test: test_data)
     
-    for result in results {
-        for neighbor in result {
-            printToAppConsole("class: \(neighbor)")
-        }
+//    var i : Int = 0
+//    for result in results {
+//        i += 1
+//        if i > 50 {
+//            printToAppConsole("class: \(result[0])")
+//            i = 0
+//        }
+//    }
+    
+    let labels = reduceKnn(test: test_data, train: mappedPoints, k: k)
+//    
+//    var i : Int = 0
+    for label in labels {
+//        i += 1
+//        if i > 50 {
+        printToAppConsole("class: \(label)")
+//            i = 0
+//        }
     }
 }
 
-func mapKnn(train train_data: Dataset, test test_data: Dataset, k: Int) -> [[Int]] {
-    // results is a mapping of [subset_index : CD], where CD is a two
-    // dimensional array. Each row is associated with a test point, and
-    // contains the k nearest neighbors from the train data
-    var results = [[Int]]()
-    results = map(test_data) { test_point in
-        var cd = [Int!].init(repeating: nil, count: k)
-        let nn = knn(point: test_point, data: train_data, k: 10)
-        for n in 0..<k {
-            cd[n] = nn[n]
+func mapKnn(train train_data: Dataset, test test_data: Dataset) -> MappedSet {
+    
+    var results = [[MappedPoint]]()
+    
+    // use map to find the distance to each other point, in parallel
+    var i : Int = 0
+    for point in test_data {
+        i += 1
+        if i < 100 {
+            continue
+        }
+        i = 0
+        results.append(train_data.parallelMapChunked {
+            train_point -> MappedPoint in
+            return MappedPoint(label: train_point.label!, dist: point - train_point)
+        })
+        
+        
+//        // add the neighbors to a priority queue and
+//        var neighborQueue = PriorityQueue<PrioritizedElement<Int>>()
+//        for neighbor in neighbors {
+//            let element = PrioritizedElement(data: neighbor.label, priority: neighbor.dist)
+//            neighborQueue.push(element)
+//        }
+//        let result = Array(neighborQueue.prefix(k))
+//        let point = Point(features: result.map {$0.data}, label: nil)
+//        results.append(point)
+    }
+
+    return MappedSet(points: results)
+}
+
+func reduceKnn(test test_data: Dataset, train train_data: MappedSet, k: Int) -> [Int] {
+    let labels = test_data.map{ point -> Int in
+        let base = [MappedPoint]()
+        let result = train_data.reduce(base) { p1, p2 in
+            var mergedPoints = [MappedPoint]()
+            var index1 = 0
+            var index2 = 0
+            for _ in 0..<k {
+                if index1 < p1.count && p1[index1].dist < p2[index2].dist {
+                    mergedPoints.append(p1[index1])
+                    index1 += 1
+                } else if index2 < p2.count {
+                    mergedPoints.append(p2[index2])
+                    index2 += 1
+                }
+            }
+            return mergedPoints
         }
         
-        return cd
+        // vote for class label
+        var nearbyLabels = [Int:Int]()
+        for point in result {
+            if nearbyLabels[point.label] == nil {
+                nearbyLabels[point.label] = 1
+            } else {
+                nearbyLabels[point.label]! += 1
+            }
+        }
+
+        // find label with most votes
+        var maxLabel : Int = -1
+        var maxCount : Int = 0
+        for (label, count) in nearbyLabels {
+            if count > maxCount {
+                maxLabel = label
+                maxCount = count
+            } else if count == maxCount {
+                maxLabel = label < maxLabel ? label : maxLabel
+            }
+        }
+        
+        return maxLabel
     }
     
-    return results
+    return labels
 }
 
 // Brute force kNN for a single point, it's garbage but for now we just need a
@@ -50,7 +125,7 @@ func knn(point: Point, data: Dataset, k: Int) -> [Int] {
     // find distance to each point
     for train_point in data {
 		let dist = point - train_point
-		let element = PrioritizedElement(data: point.label, priority: dist)
+		let element = PrioritizedElement(data: point.label!, priority: dist)
         cdprior.push(element)
     }
     
