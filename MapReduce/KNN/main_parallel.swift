@@ -6,9 +6,7 @@
 import Foundation
 import MapReduce
 
-func main(k: Int) {
-	printToAppConsole("Hello World! \(k)")
-	
+func main_parallel(k: Int) {
     let test_data = Dataset(.test)
     let train_data = Dataset(.training)
 
