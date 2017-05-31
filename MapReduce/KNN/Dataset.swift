@@ -20,6 +20,7 @@ class Dataset {
 	convenience init(_ source: Dataset.BundledSet) {
 		let base = source.rawValue
 		
+        // find paths to the files within the project
 		let dataPath = Bundle.main.path(forResource: "\(base)_data", ofType: "txt")!
 		let trainPath = Bundle.main.path(forResource: "\(base)_labels", ofType: "txt")!
 		
@@ -34,6 +35,7 @@ class Dataset {
         let dataLines = dataContents.components(separatedBy: .newlines)
         let labelLines = labelContents.components(separatedBy: .newlines)
         
+        // read points and labels from the files
         var points = [Point]()
         for i in 0..<dataLines.count {
             let dataLine = dataLines[i]
