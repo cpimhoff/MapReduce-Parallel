@@ -44,12 +44,12 @@ func main_brute(k: Int) {
 ///   - k: number of nearest neighbors
 /// - Returns: an array of integers representing class labels
 func knn(point: Point, data: Dataset, k: Int) -> [Int] {
-    var nearestQueue = PriorityQueue<PrioritizedElement<Int>>()
+    var nearestQueue = PriorityQueue<PrioritizedElement<Int>>(ascending: true)
     
     // find distance to each point
     for train_point in data {
         let dist = point - train_point
-        let element = PrioritizedElement(data: point.label!, priority: dist)
+        let element = PrioritizedElement(data: train_point.label!, priority: dist)
         nearestQueue.push(element)
     }
     
