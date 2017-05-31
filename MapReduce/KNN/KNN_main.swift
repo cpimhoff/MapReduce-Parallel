@@ -22,6 +22,13 @@ func main(k: Int) {
     }
 }
 
+/// Uses our asynchronous map function to map each training point to a class
+/// label and distance.
+///
+/// - Parameters:
+///   - train_data: <#train_data description#>
+///   - test_data: <#test_data description#>
+/// - Returns: a MappedSet storing the mapped training data for each test point
 func mapKnn(train train_data: Dataset, test test_data: Dataset) -> MappedSet {
     
     var results = [[[MappedPoint]]]()
@@ -37,6 +44,14 @@ func mapKnn(train train_data: Dataset, test test_data: Dataset) -> MappedSet {
     return MappedSet(points: results)
 }
 
+
+/// <#Description#>
+///
+/// - Parameters:
+///   - test_data: <#test_data description#>
+///   - train_data: <#train_data description#>
+///   - k: <#k description#>
+/// - Returns: <#return value description#>
 func reduceKnn(test test_data: Dataset, train train_data: MappedSet, k: Int) -> [Int] {
     var labels = [Int!].init(repeating: nil, count: test_data.count)
     for i in 0..<test_data.count {
@@ -93,8 +108,13 @@ func reduceKnn(test test_data: Dataset, train train_data: MappedSet, k: Int) -> 
     return labels
 }
 
-// Brute force kNN for a single point, it's garbage but for now we just need a
-// proof of concept
+/// Brute force kNN for a single point, to compare to our pretty function
+///
+/// - Parameters:
+///   - point: <#point description#>
+///   - data: <#data description#>
+///   - k: number of nearest neighbors
+/// - Returns: an array of integers representing class labels
 func knn(point: Point, data: Dataset, k: Int) -> [Int] {
 	var cdprior = PriorityQueue<PrioritizedElement<Int>>()
     
