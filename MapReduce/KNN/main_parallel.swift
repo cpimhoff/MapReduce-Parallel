@@ -13,11 +13,21 @@ func main_parallel(k: Int) {
     let mappedPoints = mapKnn(train: train_data, test: test_data)
     let labels = reduceKnn(test: test_data, train: mappedPoints, k: k)
 
-    var i : Int = 0
-    for label in labels {
-        i += 1
-        printToAppConsole("label: \(label), item: \(i)")
+    // calculate the accuracy of the program
+    var numCorrect : Int = 0
+    for i in 0..<test_data.count {
+        let label = labels[i]
+        // ugly unfolded if necessary because of compiler optimizations
+        if i < 100 && label == 1 {
+            numCorrect += 1
+        } else if i < 200 && label == 2 {
+            numCorrect += 1
+        } else if i < 300 && label == 7 {
+            numCorrect += 1
+        }
     }
+    
+    printToAppConsole("percent correct: \(Float(numCorrect) / Float(test_data.count))")
 }
 
 /// Uses our asynchronous map function to map each training point to a class

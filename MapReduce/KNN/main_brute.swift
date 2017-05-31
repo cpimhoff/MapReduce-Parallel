@@ -41,11 +41,22 @@ func main_brute(k: Int) {
         
         labels[i] = maxLabel
     }
-    var i : Int = 0
-    for label in labels {
-        i += 1
-        printToAppConsole("label: \(label!), item: \(i)")
+    
+    // calculate the accuracy of the program
+    var numCorrect : Int = 0
+    for i in 0..<test_data.count {
+        let label = labels[i]
+        // ugly unfolded if necessary because of compiler optimizations
+        if i < 100 && label == 1 {
+            numCorrect += 1
+        } else if i < 200 && label == 2 {
+            numCorrect += 1
+        } else if i < 300 && label == 7 {
+            numCorrect += 1
+        }
     }
+    
+    printToAppConsole("percent correct: \(Float(numCorrect) / Float(test_data.count))")
 }
 
 /// Brute force kNN for a single point, to compare to our pretty function
