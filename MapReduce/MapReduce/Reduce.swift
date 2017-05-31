@@ -8,33 +8,31 @@
 
 import Foundation
 
-public func reduce<Source:DataSource, Result>
-	(_ datasource: Source,
-	 baseValue: @escaping (Source.DataPoint) -> Result,
-	 merge: @escaping (Result, Result) -> Result) -> Result {
+private func parallelReduce<S:DataSource>
+	(_ datasource: S,
+	 merge: @escaping (S.DataPoint, S.DataPoint) -> S.DataPoint) -> S.DataPoint {
 	
 	let queue = DispatchQueue(label: "edu.carleton.chaz&ben.map", qos: .userInitiated,
 	                          attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil)
 	let all : Range<Int> = 0..<datasource.count
 	
 	//	Call down into the heavier private API to handle this
-	return subreduce(datasource, range: all, onQueue: queue, baseValue: baseValue, merge: merge)
+	return _parallelReduce(datasource, range: all, onQueue: queue, merge: merge)
 }
 
-private func subreduce<Source:DataSource, Result>
-	(_ datasource: Source, range: Range<Int>, onQueue queue: DispatchQueue,
-	 baseValue: @escaping (Source.DataPoint) -> Result,
-	 merge: @escaping (Result, Result) -> Result) -> Result {
+private func _parallelReduce<S:DataSource>
+	(_ datasource: S, range: Range<Int>, onQueue queue: DispatchQueue,
+	 merge: @escaping (S.DataPoint, S.DataPoint) -> S.DataPoint) -> S.DataPoint {
 	
 	// base cases
 	if range.count == 1 {
 		let item = datasource[range.lowerBound]
-		return baseValue(item)
+		return item
 	} else if range.count == 2 {
 		// small optimization, just compute directly
 		let lowerItem = datasource[range.lowerBound]
 		let upperItem = datasource[range.upperBound - 1]
-		return merge(baseValue(lowerItem), baseValue(upperItem))
+		return merge(lowerItem, upperItem)
 	}
 	
 	// rec. case, merge results
@@ -45,19 +43,26 @@ private func subreduce<Source:DataSource, Result>
 	// asynchronously handle subcases
 	let batch = DispatchGroup()
 	
-	var lowerResult : Result! = nil
-	var upperResult : Result! = nil
+	var lowerResult : S.DataPoint! = nil
+	var upperResult : S.DataPoint! = nil
 	// async down to another thread to handle `lowerCut`
 	queue.async(group: batch) {
-		lowerResult = subreduce(datasource, range: lowerCut,
-		                        onQueue: queue, baseValue: baseValue, merge: merge)
+		lowerResult = _parallelReduce(datasource, range: lowerCut, onQueue: queue, merge: merge)
 	}
 	// reuse this thread in handling `upperCut`, as we'll be blocking on handling both cases anyways
-	upperResult = subreduce(datasource, range: upperCut,
-	                        onQueue: queue, baseValue: baseValue, merge: merge)
+	upperResult = _parallelReduce(datasource, range: upperCut, onQueue: queue, merge: merge)
 	
 	// barrier (block) until subcases are complete
 	// merge synchronously
 	let _ = batch.wait(timeout: .distantFuture)
 	return merge(lowerResult, upperResult)
+}
+
+/// API is attached to `DataSource`
+public extension DataSource {
+	
+	func parallelReduce(_ merge: @escaping (DataPoint, DataPoint) -> DataPoint) -> DataPoint {
+		return MapReduce.parallelReduce(self, merge: merge)
+	}
+	
 }

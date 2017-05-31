@@ -33,32 +33,27 @@ class ReduceTests: XCTestCase {
 		}
 	}
 	
-	func testReduce() {
-		var result : Float?
-		var expected : Float?
-		
-		let baseValuation = {
-			(val:Int) -> Float in
-			return Float(val)
-		}
-		let add = {
-			(a:Float, b:Float) -> Float in
-			Thread.sleep(forTimeInterval: artificialWorkTime)
-			return a + b
-		}
+	func testParallelReduce() {
+		var result : Int!
+		var expected : Int!
 		
 		// performance is roughly = ...
 		self.measure {
-			result = reduce(self.data, baseValue: baseValuation, merge: add)
+			result = self.data.parallelReduce {
+				x, y in
+				Thread.sleep(forTimeInterval: artificialWorkTime)
+				return x + y
+			}
 		}
 		
 		// accuracy assurance
 		expected = self.data.reduce(0) {
 			sum, next in
-			return add(sum, baseValuation(next))
+			Thread.sleep(forTimeInterval: artificialWorkTime)
+			return sum + next
 		}
 		
-		XCTAssertEqual(result!, expected!)
+		XCTAssertEqual(result, expected)
 	}
 	
 }
