@@ -11,9 +11,9 @@ import MapReduce
 
 class MappedSet {
     
-    let points : [[MappedPoint]]
+    let points : [[[MappedPoint]]]
     
-    init(points: [[MappedPoint]]) {
+    init(points: [[[MappedPoint]]]) {
         self.points = points
     }
 }
@@ -33,7 +33,7 @@ extension MappedSet : Collection {
         return i + 1
     }
     
-    subscript(index: Int) -> [MappedPoint] {
+    subscript(index: Int) -> [[MappedPoint]] {
         return self.points[index]
     }
 }

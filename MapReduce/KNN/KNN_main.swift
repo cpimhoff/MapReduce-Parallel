@@ -13,38 +13,24 @@ func main(k: Int) {
     let train_data = Dataset(.training)
 
     let mappedPoints = mapKnn(train: train_data, test: test_data)
-    
-//    var i : Int = 0
-//    for result in results {
-//        i += 1
-//        if i > 50 {
-//            printToAppConsole("class: \(result[0])")
-//            i = 0
-//        }
-//    }
-    
     let labels = reduceKnn(test: test_data, train: mappedPoints, k: k)
-//    
+
     var i : Int = 0
     for label in labels {
         i += 1
-//        if i > 50 {
-        printToAppConsole("class: \(label), item: \(i)")
-//            i = 0
-//        }
+        printToAppConsole("label: \(label), item: \(i)")
     }
 }
 
 func mapKnn(train train_data: Dataset, test test_data: Dataset) -> MappedSet {
     
-    var results = [[MappedPoint]]()
+    var results = [[[MappedPoint]]]()
     
     // use map to find the distance to each other point, in parallel
     for point in test_data {
         results.append(train_data.parallelMapChunked {
-            train_point -> MappedPoint in
-//            printToAppConsole("  label: \(train_point.label!)")
-            return MappedPoint(label: train_point.label!, dist: point - train_point)
+            train_point -> [MappedPoint] in
+            return [MappedPoint(label: train_point.label!, dist: point - train_point)]
         })
     }
 
@@ -52,51 +38,31 @@ func mapKnn(train train_data: Dataset, test test_data: Dataset) -> MappedSet {
 }
 
 func reduceKnn(test test_data: Dataset, train train_data: MappedSet, k: Int) -> [Int] {
-    let labels = test_data.map{ point -> Int in
-        let base = [MappedPoint]()
-        
-        // check that train_data has non-1 labels
-        for thing in train_data {
-//            let thing =
-            for point in thing {
-                if point.label != 1 {
-//                    printToAppConsole("  label: \(point)")
-                }
-            }
-        }
-        
+    var labels = [Int!].init(repeating: nil, count: test_data.count)
+    for i in 0..<test_data.count {
         // merge two arrays of MappedPoints together
-        let result = train_data.reduce(base) { nn1, nn2 in
+        let result = train_data[i].parallelReduce { nn1, nn2 in
             var mergedPoints = [MappedPoint]()
             var index1 = 0
             var index2 = 0
-            for _ in 0..<(nn1.count + nn2.count) {
-//                for point in nn1 {
-//                    if point.label != 1 {
-//                        printToAppConsole("  label: \(point)")
-//                    }
-//                }
-//                for point in nn2 {
-//                    if point.label != 1 {
-//                        printToAppConsole("  label: \(point)")
-//                    }
-//                }
-//                printToAppConsole("  label: \(nn1)")
-                if index1 < nn1.count && nn1[index1].dist > nn2[index2].dist {
-//                    if nn1[index1].label != 1 {
-//                        printToAppConsole("  label: \(nn1[index1].label)")
-//                    }
+            for _ in 0..<k {
+                if index1 >= nn1.count {
+                    if index2 < nn2.count {
+                        mergedPoints.append(nn2[index2])
+                        index2 += 1
+                    }
+                } else if index2 >= nn2.count {
                     mergedPoints.append(nn1[index1])
                     index1 += 1
-                } else if index2 < nn2.count {
-//                    if nn2[index2].label != 1 {
-//                        printToAppConsole("  label: \(nn2[index2].label)")
-//                    }
+                } else if nn1[index1].dist < nn2[index2].dist {
+                    mergedPoints.append(nn1[index1])
+                    index1 += 1
+                } else {
                     mergedPoints.append(nn2[index2])
                     index2 += 1
                 }
             }
-            return Array(mergedPoints.prefix(k))
+            return mergedPoints
         }
         
         // vote for class label
@@ -121,7 +87,7 @@ func reduceKnn(test test_data: Dataset, train train_data: MappedSet, k: Int) -> 
             }
         }
         
-        return maxLabel
+        labels[i] = maxLabel
     }
     
     return labels
