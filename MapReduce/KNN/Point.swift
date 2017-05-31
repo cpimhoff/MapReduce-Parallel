@@ -5,6 +5,7 @@
 
 import Foundation
 
+/// a datapoint
 struct Point {
 	
 	var features : [Int]

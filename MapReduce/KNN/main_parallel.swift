@@ -1,5 +1,5 @@
 //
-//  KNN_main.swift
+//  main_parallel.swift
 //  MapReduce
 //
 
@@ -36,14 +36,14 @@ func main_parallel(k: Int) {
     printToAppConsole("percent correct: \(Float(numCorrect) / Float(test_data.count))")
 }
 
-/// Uses our asynchronous map function to map each training point to a class
-/// label and distance.
+/// Uses our asynchronous map function to map each training point
+/// to a class label and distance (`MappedPoint`). Collect these in a `MappedMatrix`.
 ///
 /// - Parameters:
 ///   - test_data: points to be classified
 ///   - train_data: training points used to classify the test points
-/// - Returns: a MappedSet storing the mapped training data for each test point
-func mapKnn(point test_point: Point, train train_data: Dataset) -> MappedSet {
+/// - Returns: a `MappedSet` storing the mapped training data for each test point.
+func mapKnn(point test_point: Point, train train_data: Dataset) -> MappedMatrix {
     // use map to find the distance to each other point, in parallel
     let result = train_data.parallelMapChunked {
         train_point -> [MappedPoint] in
@@ -51,18 +51,17 @@ func mapKnn(point test_point: Point, train train_data: Dataset) -> MappedSet {
                             dist: test_point - train_point)]
     }
 
-    return MappedSet(points: result)
+    return MappedMatrix(rawArray: result)
 }
 
-
-/// Finds the k nearest neighbors of each test point.
+/// Reduce the given test point and training data distances to the k nearest
+/// neighbors for each point.
 ///
 /// - Parameters:
-///   - test_data: points to be classified
-///   - train_data: training points used to classify the test points
+///   - data: a matrix containing distances from training points to a test point
 ///   - k: number of nearest neighbors
-/// - Returns: a two dimensional array of nearest neighbors
-func reduceKnn(data train_data: MappedSet, k: Int) -> [MappedPoint] {
+/// - Returns: an array of MappedPoints representing nearest neighbors
+func reduceKnn(data train_data: MappedMatrix, k: Int) -> [MappedPoint] {
     // merge two sorted arrays of MappedPoints together
     let result = train_data.parallelReduce { nn1, nn2 in
         var mergedPoints = [MappedPoint]()

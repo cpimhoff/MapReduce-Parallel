@@ -6,6 +6,7 @@
 import Foundation
 import MapReduce
 
+/// Contains a set of datapoints, typically loaded from a file.
 class Dataset {
 	
     let points : [Point]
@@ -54,7 +55,7 @@ class Dataset {
 	
 }
 
-// Conform this structure to `DataSource` so our MapReduce framework can use it directly, and to `Sequence` to allow range-based for loops and iteration
+// Conform this structure to `Collection` so our MapReduce framework can use it directly
 extension Dataset : Collection {
 	
 	var startIndex: Int {
