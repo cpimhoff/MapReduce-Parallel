@@ -7,8 +7,8 @@ import Foundation
 
 struct Point {
 	
-	let features : [Int]
-    let label : Int
+	var features : [Int]
+    var label : Int?
 	
 	/// Euclidean distance between this Point and the reciever
 	func distance(to other: Point) -> Float {
@@ -37,6 +37,11 @@ extension Point : Equatable {
 	// take distance between points using the '-' operator
 	static func -(_ lhs: Point, _ rhs: Point) -> Float {
 		return lhs.distance(to: rhs)
-	}
+    }
+    
+    /// Index the receiver with the first element at index `0`, and the last at index `self.count - 1`
+    subscript(index: Int) -> Int {
+        return self.features[index]
+    }
 	
 }
