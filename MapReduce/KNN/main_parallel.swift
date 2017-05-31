@@ -105,25 +105,3 @@ func reduceKnn(test test_data: Dataset, train train_data: MappedSet, k: Int) -> 
     
     return labels
 }
-
-/// Brute force kNN for a single point, to compare to our pretty function
-///
-/// - Parameters:
-///   - point: <#point description#>
-///   - data: <#data description#>
-///   - k: number of nearest neighbors
-/// - Returns: an array of integers representing class labels
-func knn(point: Point, data: Dataset, k: Int) -> [Int] {
-	var cdprior = PriorityQueue<PrioritizedElement<Int>>()
-    
-    // find distance to each point
-    for train_point in data {
-		let dist = point - train_point
-		let element = PrioritizedElement(data: point.label!, priority: dist)
-        cdprior.push(element)
-    }
-    
-    // find the k closest points
-	let result = Array(cdprior.prefix(k))
-	return result.map { $0.data }
-}
