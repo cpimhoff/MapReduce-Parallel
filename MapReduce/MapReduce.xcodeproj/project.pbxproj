@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28DD05391EDE5E07005DFA69 /* MappedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DD05381EDE5E07005DFA69 /* MappedSet.swift */; };
+		28DD053B1EDE5EAD005DFA69 /* MappedPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DD053A1EDE5EAD005DFA69 /* MappedPoint.swift */; };
 		28E601761EDD1E7D0056B522 /* test_data.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28E601721EDD1E7D0056B522 /* test_data.txt */; };
 		28E601771EDD1E7D0056B522 /* test_labels.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28E601731EDD1E7D0056B522 /* test_labels.txt */; };
 		28E601781EDD1E7D0056B522 /* train_data.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28E601741EDD1E7D0056B522 /* train_data.txt */; };
@@ -47,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		28DD05381EDE5E07005DFA69 /* MappedSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappedSet.swift; sourceTree = "<group>"; };
+		28DD053A1EDE5EAD005DFA69 /* MappedPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MappedPoint.swift; sourceTree = "<group>"; };
 		28E601721EDD1E7D0056B522 /* test_data.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test_data.txt; path = data/test_data.txt; sourceTree = "<group>"; };
 		28E601731EDD1E7D0056B522 /* test_labels.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test_labels.txt; path = data/test_labels.txt; sourceTree = "<group>"; };
 		28E601741EDD1E7D0056B522 /* train_data.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = train_data.txt; path = data/train_data.txt; sourceTree = "<group>"; };
@@ -171,6 +175,8 @@
 				CB4679101EDC00A3004C4CC4 /* Dataset.swift */,
 				CB4679121EDC00AF004C4CC4 /* Point.swift */,
 				CB17F06E1EDE042200555F33 /* PriorityQueue.swift */,
+				28DD05381EDE5E07005DFA69 /* MappedSet.swift */,
+				28DD053A1EDE5EAD005DFA69 /* MappedPoint.swift */,
 			);
 			path = KNN;
 			sourceTree = "<group>";
@@ -360,7 +366,9 @@
 				CBCEEF281EDBD3FE00DD9678 /* KNN_main.swift in Sources */,
 				CB4679131EDC00AF004C4CC4 /* Point.swift in Sources */,
 				CBCEEF191EDBD22100DD9678 /* ViewController.swift in Sources */,
+				28DD05391EDE5E07005DFA69 /* MappedSet.swift in Sources */,
 				CB4679111EDC00A3004C4CC4 /* Dataset.swift in Sources */,
+				28DD053B1EDE5EAD005DFA69 /* MappedPoint.swift in Sources */,
 				CBCEEF171EDBD22100DD9678 /* AppDelegate.swift in Sources */,
 				CB17F06F1EDE042200555F33 /* PriorityQueue.swift in Sources */,
 			);
