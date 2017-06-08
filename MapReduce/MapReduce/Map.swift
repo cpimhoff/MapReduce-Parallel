@@ -51,6 +51,32 @@ public extension Collection where Self.Index == Int, Self.IndexDistance == Int {
 	
 	/// Maps values of the reciever into new values using a provided mapping closure.
 	///
+	/// Work is concurrently handled by the system, automatically balancing load between cores.
+	///
+	/// - Parameters:
+	///   - mapping: A mapping closure from the points in the reciever to a new result
+	/// - Returns: An array containing (in order) the points from the reciever after mapping
+	func concurrentMap<MappedElement>
+		(_ mapping: @escaping (Element) -> MappedElement) -> [MappedElement] {
+		
+		// create empty results array of length `datasource.count`
+		let results = SynchronizedArray<MappedElement!>.init(repeating: nil, count: self.count)
+		
+		// dispatch work concurrently, using automatic load balancing
+		DispatchQueue.concurrentPerform(iterations: self.count) { index in
+			// fetching the item is async as well, in case that is time intensive (such as on a DB)
+			let item = self[index]
+			// envoke user specified mapping function
+			let mappedItem = mapping(item)
+			
+			results[index] = mappedItem
+		}
+		
+		return results.array
+	}
+	
+	/// Maps values of the reciever into new values using a provided mapping closure.
+	///
 	/// Work is asynchronously handled in chunks, improving performance in certain cases,
 	/// such as when the work to map each item is non-trivial and the datasource is very large.
 	///

@@ -49,6 +49,25 @@ class MapTests: XCTestCase {
 		XCTAssertEqual(results, expected)
 	}
 	
+	func testConcurrentMap() {
+		var results : [String]!
+		var expected : [String]!
+		
+		// performance is roughly = workTime * (datasetSize / max_threads)
+		self.measure {
+			results = self.data.concurrentMap {
+				x in
+				Thread.sleep(forTimeInterval: artificialWorkTime)
+				return "\(x)"
+			}
+		}
+		
+		// accuracy assurance
+		expected = self.data.map { x in "\(x)" }
+		
+		XCTAssertEqual(results, expected)
+	}
+	
 	func testParallelMapChunked() {
 		var results : [String]!
 		var expected : [String]!
