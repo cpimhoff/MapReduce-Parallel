@@ -77,10 +77,10 @@ func printToAppConsole(_ obj: Any) {
 	let description = String(describing: obj)
 	
 	if Thread.isMainThread {
-		ViewController.consoleTextBox.string! += (description + "\n")
+		ViewController.consoleTextBox.string += (description + "\n")
 	} else {
 		DispatchQueue.main.sync {
-			ViewController.consoleTextBox.string! += (description + "\n")
+			ViewController.consoleTextBox.string += (description + "\n")
 		}
 	}
 }

@@ -32,7 +32,10 @@ extension Point : Equatable {
 	// check if two points are identical
 	static func ==(_ lhs: Point, _ rhs: Point) -> Bool {
 		let featurePairs = zip(lhs.features, rhs.features)
-		return !featurePairs.contains { x, y in x != y }
+		return !featurePairs.contains { (pair) -> Bool in
+			let (x, y) = pair
+			return x != y
+		}
 	}
 	
 	// take distance between points using the '-' operator
